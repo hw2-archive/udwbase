@@ -1,3 +1,7 @@
+# config files
+
+config.php
+
 # images directories
 
 /images/maps
@@ -10,7 +14,7 @@ cache/armory/*
 cache/world/*
 cache/templates/wowhead/*
 
-# popular IDE directories
+# popular IDE directories & files
 
 nbproject
 
