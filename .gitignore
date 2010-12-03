@@ -1,0 +1,17 @@
+# images directories
+
+/images/maps
+/images/icons
+/images/tmp
+
+# cache directories
+
+cache/armory/*
+cache/world/*
+cache/templates/wowhead/*
+
+# popular IDE directories
+
+nbproject
+
+
