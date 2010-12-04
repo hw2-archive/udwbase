@@ -313,7 +313,7 @@ function loot_table($table, $lootid, $max_percent=100)
 	$rows = $DB->select('
 		SELECT l.ChanceOrQuestChance, l.mincountOrRef, l.maxcount as `d-max`, l.groupid, ?#, i.entry, i.maxcount
 			{, loc.name_loc?d AS `name_loc`}
-		FROM ?_?# l
+		FROM '. $table .' l
 			LEFT JOIN (?_udwbase_icons a, ?_item_template i) ON l.item=i.entry AND a.id=i.displayid
 			{LEFT JOIN (?_locales_item loc) ON loc.entry=i.entry AND ?d}
 		WHERE
@@ -322,7 +322,6 @@ function loot_table($table, $lootid, $max_percent=100)
 		',
 		$item_cols[2],
 		($_SESSION['locale'])? $_SESSION['locale']: DBSIMPLE_SKIP,
-		$table,
 		($_SESSION['locale'])? 1: DBSIMPLE_SKIP,
 		$lootid,
 		($UDWBaseconf['limit']!=0)? $UDWBaseconf['limit']: DBSIMPLE_SKIP
@@ -369,7 +368,7 @@ function loot_table($table, $lootid, $max_percent=100)
 			// Вот если это ссылка, то ######
 			// Наша задача - вызвать эту же функцию, но с предопределенным значением percent и maxcount
 			for ($j=1;$j<=$row['d-max'];$j++)
-				$loot = array_merge($loot, loot_table('reference_loot_template', -$row['mincountOrRef'], $row['ChanceOrQuestChance']));
+				$loot = array_merge($loot, loot_table('?_reference_loot_template', -$row['mincountOrRef'], $row['ChanceOrQuestChance']));
 		}
 	}
 	// Iterate group loot
@@ -405,12 +404,11 @@ function drop($table, $item)
 	global $DB;
 	$rows = $DB->select('
 		SELECT l.ChanceOrQuestChance, l.mincountOrRef, l.maxcount, l.entry
-		FROM ?_?# l
+		FROM '. $table. ' l
 		WHERE
 			l.item=?
 		{LIMIT ?d}
 		',
-		$table,
 		$item,
 		($UDWBaseconf['limit']!=0)? $UDWBaseconf['limit']: DBSIMPLE_SKIP
 	);

@@ -254,15 +254,15 @@ if(!$npc = load_cache(1, intval($id)))
 	unset ($rows_s);
 
 	// Дроп
-	if (!($npc['drop'] = loot('creature_loot_template', $lootid)))
+	if (!($npc['drop'] = loot('?_creature_loot_template', $lootid)))
 		unset ($npc['drop']);
 
 	// Кожа
-	if (!($npc['skinning'] = loot('skinning_loot_template', $lootid)))
+	if (!($npc['skinning'] = loot('?_skinning_loot_template', $lootid)))
 		unset ($npc['skinning']);
 
 	// Воруеццо
-	if (!($npc['pickpocketing'] = loot('pickpocketing_loot_template', $lootid)))
+	if (!($npc['pickpocketing'] = loot('?_pickpocketing_loot_template', $lootid)))
 		unset ($npc['pickpocketing']);
 
 	// Начиниают квесты...

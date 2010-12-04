@@ -37,7 +37,7 @@ if(!$item = load_cache(5, $id))
 	$item = iteminfo($podrazdel, 1);
 
 	// Поиск мобов с которых эта вещь лутится
-	$drops_cr = drop('creature_loot_template',$item['entry']);
+	$drops_cr = drop('?_creature_loot_template',$item['entry']);
 	if ($drops_cr)
 	{
 		$item['droppedby'] = array();
@@ -69,7 +69,7 @@ if(!$item = load_cache(5, $id))
 	}
 	unset ($drops_cr);
 
-        $drops_rf = drop('reference_loot_template',$item['entry']);
+        $drops_rf = drop('?_reference_loot_template',$item['entry']);
 	if ($drops_rf)
 	{
 		foreach($drops_rf as $refid => $drop)
@@ -78,7 +78,7 @@ if(!$item = load_cache(5, $id))
 			foreach ($lrows as $numRow=>$lrow)
 			{
 				// calculate drop rate ( maybe to speedup)
-				$loot = loot('creature_loot_template', $lrow['entry']);
+				$loot = loot('?_creature_loot_template', $lrow['entry']);
 				foreach ($loot as $info => $value)
 				{
 				    if ($value['entry'] == $item['entry'])
@@ -113,7 +113,7 @@ if(!$item = load_cache(5, $id))
 	unset ($drops_rf);
 
 	// Поиск объектов, из которых лутится эта вещь
-	$drops_go = drop('gameobject_loot_template',$item['entry']);
+	$drops_go = drop('?_gameobject_loot_template',$item['entry']);
 	if ($drops_go)
 	{
 		$item['containedinobject'] = array();
@@ -267,7 +267,7 @@ if(!$item = load_cache(5, $id))
 	unset ($rows_qrw);
 
 	// Поиск вещей, в которых находятся эти вещи
-	$drops_cii = drop('item_loot_template',$item['entry']);
+	$drops_cii = drop('?_item_loot_template',$item['entry']);
 	if ($drops_cii)
 	{
 		$item['containedinitem'] = array();
@@ -297,11 +297,11 @@ if(!$item = load_cache(5, $id))
 	}
 
 	// Какие вещи содержатся в этой вещи
-	if (!($item['contains'] = loot('item_loot_template', $item['entry'])))
+	if (!($item['contains'] = loot('?_item_loot_template', $item['entry'])))
 		unset ($item['contains']);
 
 	// Поиск созданий, у которых воруется вещь
-	$drops_pp = drop('pickpocketing_loot_template',$item['entry']);
+	$drops_pp = drop('?_pickpocketing_loot_template',$item['entry']);
 	if ($drops_pp)
 	{
 		$item['pickpocketingloot'] = array();
@@ -334,7 +334,7 @@ if(!$item = load_cache(5, $id))
 	unset ($drops_pp);
 
 	// Поиск созданий, с которых сдираеццо эта шкура
-	$drops_sk = drop('skinning_loot_template',$item['entry']);
+	$drops_sk = drop('?_skinning_loot_template',$item['entry']);
 	if ($drops_sk)
 	{
 		$item['skinnedfrom'] = array();
@@ -367,11 +367,11 @@ if(!$item = load_cache(5, $id))
 	unset ($drops_sk);
 
 	// Дизенчантитcя в:
-	if (!($item['disenchanting'] = loot('disenchant_loot_template', $item['DisenchantID'])))
+	if (!($item['disenchanting'] = loot('?_disenchant_loot_template', $item['DisenchantID'])))
 		unset ($item['disenchanting']);
 
 	// Получается дизэнчантом из..
-	$drops_de = drop('disenchant_loot_template',$item['entry']);
+	$drops_de = drop('?_disenchant_loot_template',$item['entry']);
 	if ($drops_de)
 	{
 		$item['disenchantedfrom'] = array();
@@ -519,7 +519,7 @@ if(!$item = load_cache(5, $id))
 	unset ($rows_cf);
 
 	// Ловится в ...
-	$drops_fi = drop('fishing_loot_template',$item['entry']);
+	$drops_fi = drop('?_fishing_loot_template',$item['entry']);
 	if ($drops_fi)
 	{
 		$item['fishedin'] = array();

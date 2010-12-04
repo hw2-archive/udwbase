@@ -442,7 +442,7 @@ function objectinfo2(&$Row, $level=0)
 		if(IsSet($object['lootid']))
 		{
 			$object['drop'] = array();
-			if(!($object['drop'] = loot('gameobject_loot_template', $object['lootid'])))
+			if(!($object['drop'] = loot('?_gameobject_loot_template', $object['lootid'])))
 				unset ($object['drop']);
 		}
 	}
