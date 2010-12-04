@@ -10,11 +10,11 @@
 */
 
 	// Загружаем новости
-	$rows = @$DB->select('SELECT text_loc?d AS text FROM ?_news ORDER BY time DESC, id DESC LIMIT 5', $_SESSION['locale']);
+	$rows = @$DB->select('SELECT text_loc?d AS text FROM udwbase_news ORDER BY time DESC, id DESC LIMIT 5', $_SESSION['locale']);
 	if($rows)
 		$smarty->assign('news', $rows);
 
-        $rows2 = @$DB->select('SELECT site_version AS text FROM db_version LIMIT 1');
+        $rows2 = @$DB->select('SELECT site_version AS text FROM ?_db_version LIMIT 1');
 	if($rows2)
 		$smarty->assign('version', $rows2);
 

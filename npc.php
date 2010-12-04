@@ -37,9 +37,9 @@ if(!$npc = load_cache(1, intval($id)))
 				?,
 			}
 			f.name_loc'.$_SESSION['locale'].' as `faction-name`, ft.factionID as `factionID`
-		FROM ?_factiontemplate ft, ?_factions f, creature_template c
+		FROM udwbase_factiontemplate ft, udwbase_factions f, ?_creature_template c
 		{
-			LEFT JOIN (locales_creature l)
+			LEFT JOIN (?_locales_creature l)
 			ON l.entry=c.entry AND ?
 		}
 		WHERE
@@ -116,7 +116,7 @@ if(!$npc = load_cache(1, intval($id)))
 		{
 			$tmp2 = $DB->select('
 				SELECT action?d_param1
-				FROM creature_ai_scripts
+				FROM ?_creature_ai_scripts
 				WHERE
 					creature_id=?d
 					AND action?d_type=11
@@ -145,7 +145,7 @@ if(!$npc = load_cache(1, intval($id)))
 	// Если это пет со способностью:
 	$row = $DB->selectRow('
 		SELECT Spell1, Spell2, Spell3, Spell4
-		FROM petcreateinfo_spell
+		FROM ?_petcreateinfo_spell
 		WHERE
 			entry=?d
 		',
@@ -160,9 +160,9 @@ if(!$npc = load_cache(1, intval($id)))
 				{
 					$spellrow = $DB->selectRow('
 						SELECT ?#, spellID
-						FROM ?_spell, ?_spellicons
+						FROM udwbase_spell, udwbase_spellicons
 						WHERE
-							spellID=(SELECT effect'.$k.'triggerspell FROM ?_spell WHERE spellID=?d AND (effect'.$k.'id IN (36,57)))
+							spellID=(SELECT effect'.$k.'triggerspell FROM udwbase_spell WHERE spellID=?d AND (effect'.$k.'id IN (36,57)))
 							AND id=spellicon
 						LIMIT 1
 						',
@@ -182,7 +182,7 @@ if(!$npc = load_cache(1, intval($id)))
 	// Если это просто тренер
 	$teachspells = $DB->select('
 		SELECT ?#, spellID
-		FROM npc_trainer, ?_spell, ?_spellicons
+		FROM ?_npc_trainer, udwbase_spell, udwbase_spellicons
 		WHERE
 			entry=?d
 			AND spellID=Spell
@@ -208,8 +208,8 @@ if(!$npc = load_cache(1, intval($id)))
 	$rows_s = $DB->select('
 		SELECT ?#, i.entry, i.maxcount, n.`maxcount` as `drop-maxcount`
 			{, l.name_loc?d AS `name_loc`}
-		FROM npc_vendor n, ?_icons, item_template i
-			{LEFT JOIN (locales_item l) ON l.entry=i.entry AND ?d}
+		FROM ?_npc_vendor n, udwbase_icons, ?_item_template i
+			{LEFT JOIN (?_locales_item l) ON l.entry=i.entry AND ?d}
 		WHERE
 			n.entry=?
 			AND i.entry=n.item
@@ -231,7 +231,7 @@ if(!$npc = load_cache(1, intval($id)))
 			$npc['sells'][$numRow]['cost'] = array();
 			/* if ($row['ExtendedCost']) [NOTE] overwrite with honor points? 
 			{
-				$extcost = $DB->selectRow('SELECT * FROM ?_item_extended_cost WHERE extendedcostID=?d LIMIT 1', $row['ExtendedCost']);
+				$extcost = $DB->selectRow('SELECT * FROM udwbase_item_extended_cost WHERE extendedcostID=?d LIMIT 1', $row['ExtendedCost']);
 				if ($extcost['reqhonorpoints']>0)
 					$npc['sells'][$numRow]['cost']['honor'] = (($npc['A']==1)? 1: -1) * $extcost['reqhonorpoints'];
 				if ($extcost['reqarenapoints']>0)
@@ -268,7 +268,7 @@ if(!$npc = load_cache(1, intval($id)))
 	// Начиниают квесты...
 	$rows_qs = $DB->select('
 		SELECT ?#
-		FROM creature_questrelation c, quest_template q
+		FROM ?_creature_questrelation c, ?_quest_template q
 		WHERE
 			c.id=?
 			AND q.entry=c.quest
@@ -288,7 +288,7 @@ if(!$npc = load_cache(1, intval($id)))
 	// Заканчивают квесты...
 	$rows_qe = $DB->select('
 		SELECT ?#
-		FROM creature_involvedrelation c, quest_template q
+		FROM ?_creature_involvedrelation c, ?_quest_template q
 		WHERE
 			c.id=?
 			AND q.entry=c.quest
@@ -308,7 +308,7 @@ if(!$npc = load_cache(1, intval($id)))
 	// Необходимы для квеста..
 	$rows_qo = $DB->select('
 		SELECT ?#
-		FROM quest_template
+		FROM ?_quest_template
 		WHERE
 			ReqCreatureOrGOId1=?
 			OR ReqCreatureOrGOId2=?

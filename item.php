@@ -49,8 +49,8 @@ if(!$item = load_cache(5, $id))
 					, l.name_loc?d as `name_loc`
 					, l.subname_loc'.$_SESSION['locale'].' as `subname_loc`
 				}
-				FROM ?_factiontemplate, creature_template c
-				{ LEFT JOIN (locales_creature l) ON l.entry=c.entry AND ? }
+				FROM udwbase_factiontemplate, ?_creature_template c
+				{ LEFT JOIN (?_locales_creature l) ON l.entry=c.entry AND ? }
 				WHERE
 					lootid=?d
 					AND factiontemplateID=faction_A
@@ -74,7 +74,7 @@ if(!$item = load_cache(5, $id))
 	{
 		foreach($drops_rf as $refid => $drop)
 		{
-			$lrows = $DB->select('SELECT entry,ChanceOrQuestChance FROM creature_loot_template WHERE mincountOrRef = -?d',$refid);
+			$lrows = $DB->select('SELECT entry,ChanceOrQuestChance FROM ?_creature_loot_template WHERE mincountOrRef = -?d',$refid);
 			foreach ($lrows as $numRow=>$lrow)
 			{
 				// calculate drop rate ( maybe to speedup)
@@ -91,8 +91,8 @@ if(!$item = load_cache(5, $id))
 						, l.name_loc?d as `name_loc`
 						, l.subname_loc'.$_SESSION['locale'].' as `subname_loc`
 					}
-					FROM ?_factiontemplate, creature_template c
-					{ LEFT JOIN (locales_creature l) ON l.entry=c.entry AND ? }
+					FROM udwbase_factiontemplate, ?_creature_template c
+					{ LEFT JOIN (?_locales_creature l) ON l.entry=c.entry AND ? }
 					WHERE
 	                                        c.lootid = ?d
 						AND factiontemplateID=faction_A
@@ -124,7 +124,7 @@ if(!$item = load_cache(5, $id))
 			// Сундуки
 			$rows = $DB->select('
 				SELECT g.entry, g.name, g.type, a.lockproperties1
-				FROM gameobject_template g, ?_lock a
+				FROM ?_gameobject_template g, udwbase_lock a
 				WHERE
 					g.data1=?d
 					AND g.type=?d
@@ -170,8 +170,8 @@ if(!$item = load_cache(5, $id))
 			, l.name_loc?d as `name_loc`
 			, l.subname_loc'.$_SESSION['locale'].' as `subname_loc`
 		}
-		FROM npc_vendor v, ?_factiontemplate, creature_template c
-		{ LEFT JOIN (locales_creature l) ON l.entry=c.entry AND ? }
+		FROM ?_npc_vendor v, udwbase_factiontemplate, ?_creature_template c
+		{ LEFT JOIN (?_locales_creature l) ON l.entry=c.entry AND ? }
 		WHERE
 			v.item=?d
 			AND c.entry=v.entry
@@ -195,7 +195,7 @@ if(!$item = load_cache(5, $id))
 			if ($row['ExtendedCost'])
 			{
 				$item['soldby'][$numRow]['cost'] = array();
-				$extcost = $DB->selectRow('SELECT * FROM ?_item_extended_cost WHERE extendedcostID=?d LIMIT 1', $row['ExtendedCost']);
+				$extcost = $DB->selectRow('SELECT * FROM udwbase_item_extended_cost WHERE extendedcostID=?d LIMIT 1', $row['ExtendedCost']);
 				if ($extcost['reqhonorpoints']>0)
 					$item['soldby'][$numRow]['cost']['honor'] = (($row['A']==1)? 1: -1) * $extcost['reqhonorpoints'];
 				if ($extcost['reqarenapoints']>0)
@@ -220,7 +220,7 @@ if(!$item = load_cache(5, $id))
 	// Поиск квестов, для выполнения которых нужен этот предмет
 	$rows_qr = $DB->select('
 		SELECT ?#
-		FROM quest_template
+		FROM ?_quest_template
 		WHERE
 			ReqItemId1=?d
 			OR ReqItemId2=?d
@@ -241,7 +241,7 @@ if(!$item = load_cache(5, $id))
 	// Поиск квестов, наградой за выполнение которых, является этот предмет
 	$rows_qrw = $DB->select('
 		SELECT ?#
-		FROM quest_template
+		FROM ?_quest_template
 		WHERE
 			RewItemId1=?d
 			OR RewItemId2=?d
@@ -276,8 +276,8 @@ if(!$item = load_cache(5, $id))
 			$rows = $DB->select('
 				SELECT c.?#, c.entry, maxcount
 				{ , l.name_loc?d AS `name_loc`}
-				FROM ?_icons, item_template c
-				{ LEFT JOIN (locales_item l) ON l.entry=c.entry AND ? }
+				FROM udwbase_icons, ?_item_template c
+				{ LEFT JOIN (?_locales_item l) ON l.entry=c.entry AND ? }
 				WHERE
 					c.entry=?d
 					AND id=displayid
@@ -313,8 +313,8 @@ if(!$item = load_cache(5, $id))
 					, l.name_loc?d as `name_loc`
 					, l.subname_loc'.$_SESSION['locale'].' as `subname_loc`
 				}
-				FROM ?_factiontemplate, creature_template c
-				{ LEFT JOIN (locales_creature l) ON l.entry=c.entry AND ? }
+				FROM udwbase_factiontemplate, ?_creature_template c
+				{ LEFT JOIN (?_locales_creature l) ON l.entry=c.entry AND ? }
 				WHERE
 					pickpocketloot=?d
 					AND factiontemplateID=faction_A
@@ -346,8 +346,8 @@ if(!$item = load_cache(5, $id))
 					, l.name_loc?d as `name_loc`
 					, l.subname_loc'.$_SESSION['locale'].' as `subname_loc`
 				}
-				FROM ?_factiontemplate, creature_template c
-				{ LEFT JOIN (locales_creature l) ON l.entry=c.entry AND ? }
+				FROM udwbase_factiontemplate, ?_creature_template c
+				{ LEFT JOIN (?_locales_creature l) ON l.entry=c.entry AND ? }
 				WHERE
 					skinloot=?d
 					AND factiontemplateID=faction_A
@@ -382,8 +382,8 @@ if(!$item = load_cache(5, $id))
 				{
 					, l.name_loc?d as `name_loc`
 				}
-				FROM ?_icons, item_template c
-				{ LEFT JOIN (locales_item l) ON l.entry=c.entry AND ? }
+				FROM udwbase_icons, ?_item_template c
+				{ LEFT JOIN (?_locales_item l) ON l.entry=c.entry AND ? }
 				WHERE
 					DisenchantID=?d
 					AND id=displayid
@@ -413,8 +413,8 @@ if(!$item = load_cache(5, $id))
 			{
 				, l.name_loc?d as `name_loc`
 			}
-			FROM ?_icons, item_template c
-			{ LEFT JOIN (locales_item l) ON l.entry=c.entry AND ? }
+			FROM udwbase_icons, ?_item_template c
+			{ LEFT JOIN (?_locales_item l) ON l.entry=c.entry AND ? }
 			WHERE
 				BagFamily=?d
 				AND ContainerSlots>0
@@ -437,7 +437,7 @@ if(!$item = load_cache(5, $id))
 	// Реагент для...
 	$rows_r = $DB->select('
 		SELECT ?#, spellID
-		FROM ?_spell s, ?_spellicons i
+		FROM udwbase_spell s, udwbase_spellicons i
 		WHERE
 			(( reagent1=?d
 			OR reagent2=?d
@@ -490,7 +490,7 @@ if(!$item = load_cache(5, $id))
 	// Создается из...
 	$rows_cf = $DB->select('
 		SELECT ?#, s.spellID
-		FROM ?_spell s, ?_spellicons i
+		FROM udwbase_spell s, udwbase_spellicons i
 		WHERE
 			((s.effect1itemtype=?d
 			OR s.effect2itemtype=?d
@@ -507,7 +507,7 @@ if(!$item = load_cache(5, $id))
 		{
 			$skillrow = $DB->selectRow('
 				SELECT skillID, min_value, max_value
-				FROM ?_skill_line_ability
+				FROM udwbase_skill_line_ability
 				WHERE spellID=?d
 				LIMIT 1',
 				$row['spellID']
@@ -528,7 +528,7 @@ if(!$item = load_cache(5, $id))
 			// Обычные локации
 			$row = $DB->selectRow('
 				SELECT name_loc'.$_SESSION['locale'].' AS name, areatableID as id
-				FROM ?_zones
+				FROM udwbase_zones
 				WHERE
 					areatableID=?d
 					AND (x_min!=0 AND x_max!=0 AND y_min!=0 AND y_max!=0)
@@ -543,7 +543,7 @@ if(!$item = load_cache(5, $id))
 				// Инсты
 				$row = $DB->selectRow('
 					SELECT name_loc'.$_SESSION['locale'].' AS name, mapID as id
-					FROM ?_zones
+					FROM udwbase_zones
 					WHERE
 						areatableID=?d
 					LIMIT 1

@@ -204,7 +204,7 @@ function coord_db2wow($mapid, $x, $y, $global)
 	// Подключение к базе
 	global $DB;
 
-	$rows = $DB->select("SELECT * FROM ?_zones WHERE (mapID=? and x_min<? and x_max>? and y_min<? and y_max>?)", $mapid, $x, $x, $y, $y);
+	$rows = $DB->select("SELECT * FROM udwbase_zones WHERE (mapID=? and x_min<? and x_max>? and y_min<? and y_max>?)", $mapid, $x, $x, $y, $y);
 
 	foreach ($rows as $numRow=>$row) {
 		// Сохраяняем имя карты и координаты
@@ -240,7 +240,7 @@ function coord_db2wow($mapid, $x, $y, $global)
 	{
 		// Ничего не найдено. Мб инста??
 
-		$row = $DB->selectRow("SELECT * FROM ?_zones WHERE (mapID=? and x_min=0 and x_max=0 and y_min=0 and y_max=0)", $mapid);
+		$row = $DB->selectRow("SELECT * FROM udwbase_zones WHERE (mapID=? and x_min=0 and x_max=0 and y_min=0 and y_max=0)", $mapid);
 		if ($row) {
 			$wow['zone'] = $row['areatableID'];
 			$wow['name'] = $row['name_loc'.$_SESSION['locale']];
@@ -291,7 +291,7 @@ function mass_coord(&$data)
 function factioninfo($id)
 {
 	global $DB;
-	$faction['name'] = $DB->selectCell('SELECT name_loc'.$_SESSION['locale'].' FROM ?_factions WHERE factionID = ?d LIMIT 1', $id);
+	$faction['name'] = $DB->selectCell('SELECT name_loc'.$_SESSION['locale'].' FROM udwbase_factions WHERE factionID = ?d LIMIT 1', $id);
 	$faction['entry'] = $id;
 	return $faction;
 }
@@ -313,9 +313,9 @@ function loot_table($table, $lootid, $max_percent=100)
 	$rows = $DB->select('
 		SELECT l.ChanceOrQuestChance, l.mincountOrRef, l.maxcount as `d-max`, l.groupid, ?#, i.entry, i.maxcount
 			{, loc.name_loc?d AS `name_loc`}
-		FROM ?# l
-			LEFT JOIN (?_icons a, item_template i) ON l.item=i.entry AND a.id=i.displayid
-			{LEFT JOIN (locales_item loc) ON loc.entry=i.entry AND ?d}
+		FROM ?_?# l
+			LEFT JOIN (udwbase_icons a, ?_item_template i) ON l.item=i.entry AND a.id=i.displayid
+			{LEFT JOIN (?_locales_item loc) ON loc.entry=i.entry AND ?d}
 		WHERE
 			l.entry=?d
 		{LIMIT ?d}
@@ -405,7 +405,7 @@ function drop($table, $item)
 	global $DB;
 	$rows = $DB->select('
 		SELECT l.ChanceOrQuestChance, l.mincountOrRef, l.maxcount, l.entry
-		FROM ?# l
+		FROM ?_?# l
 		WHERE
 			l.item=?
 		{LIMIT ?d}
@@ -426,7 +426,7 @@ function drop($table, $item)
 			$drop[$num]['maxcount'] = $row['maxcount'];
 			
 			// We are looking for loot, which refers to this loot
-			$refrows = $DB->select('SELECT entry FROM ?# WHERE mincountOrRef=? LIMIT 200',$table, -$num);
+			$refrows = $DB->select('SELECT entry FROM ?_?# WHERE mincountOrRef=? LIMIT 200',$table, -$num);
 			foreach ($refrows as $i => $refrow)
 			{
 				$num = $refrow['entry'];
@@ -445,7 +445,7 @@ function position($id, $type)
 {
 	global $smarty, $exdata, $zonedata, $DB;
 
-	$data = $DB->select('SELECT guid, map AS m, position_x AS x, position_y AS y, spawntimesecs, {MovementType AS ?#, }"0" AS `type` FROM '.$type.' WHERE id = ?d GROUP BY ROUND(x,-2), ROUND(y,-2) ORDER BY x,y', ($type == 'gameobject' ? DBSIMPLE_SKIP : 'mt'), $id);
+	$data = $DB->select('SELECT guid, map AS m, position_x AS x, position_y AS y, spawntimesecs, {MovementType AS ?#, }"0" AS `type` FROM ?_'.$type.' WHERE id = ?d GROUP BY ROUND(x,-2), ROUND(y,-2) ORDER BY x,y', ($type == 'gameobject' ? DBSIMPLE_SKIP : 'mt'), $id);
 	if($type <> 'gameobject')
 	{
 		$wpWalkingCreaturesGuids = array();
@@ -456,7 +456,7 @@ function position($id, $type)
 		}
 		if($wpWalkingCreaturesGuids)
 		{
-			$wps = $DB->select('SELECT c.map AS m, m.position_x AS x, m.position_y AS y, "3" AS `type` FROM creature_movement m, creature c WHERE m.id = c.guid AND m.id IN (?a) GROUP BY ROUND(x,-2), ROUND(y,-2) ORDER BY x,y', $wpWalkingCreaturesGuids);
+			$wps = $DB->select('SELECT c.map AS m, m.position_x AS x, m.position_y AS y, "3" AS `type` FROM ?_creature_movement m, ?_creature c WHERE m.id = c.guid AND m.id IN (?a) GROUP BY ROUND(x,-2), ROUND(y,-2) ORDER BY x,y', $wpWalkingCreaturesGuids);
 			$data = array_merge($data, $wps);
 		}
 	}

@@ -47,8 +47,8 @@ if(!$quest = load_cache(10, intval($id)))
 		$tmp = $DB->selectRow('
 			SELECT q.entry, q.Title
 				{, l.Title_loc?d AS `Title_loc`}
-			FROM quest_template q
-				{LEFT JOIN (locales_quest l) ON l.entry=q.entry AND ?d}
+			FROM ?_quest_template q
+				{LEFT JOIN (?_locales_quest l) ON l.entry=q.entry AND ?d}
 			WHERE q.NextQuestInChain=?d
 			LIMIT 1
 			',
@@ -70,8 +70,8 @@ if(!$quest = load_cache(10, intval($id)))
 		$tmp = $DB->selectRow('
 			SELECT q.entry, q.Title, q.NextQuestInChain
 				{, l.Title_loc?d AS `Title_loc`}
-			FROM quest_template q
-				{LEFT JOIN (locales_quest l) ON l.entry=q.entry AND ?}
+			FROM ?_quest_template q
+				{LEFT JOIN (?_locales_quest l) ON l.entry=q.entry AND ?}
 			WHERE q.entry=?d
 			LIMIT 1
 			',
@@ -99,8 +99,8 @@ if(!$quest = load_cache(10, intval($id)))
 	if (!$quest['req'] = $DB->select('
 				SELECT q.entry, q.Title, q.NextQuestInChain
 					{, l.Title_loc?d AS `Title_loc`}
-				FROM quest_template q
-					{LEFT JOIN (locales_quest l) ON l.entry=q.entry AND ?}
+				FROM ?_quest_template q
+					{LEFT JOIN (?_locales_quest l) ON l.entry=q.entry AND ?}
 				WHERE
 					(q.NextQuestID=?d AND q.ExclusiveGroup<0)
 					OR (q.entry=?d AND q.NextQuestInChain<>?d)
@@ -117,8 +117,8 @@ if(!$quest = load_cache(10, intval($id)))
 	if (!$quest['open'] = $DB->select('
 				SELECT q.entry, q.Title
 					{, l.Title_loc?d AS `Title_loc`}
-				FROM quest_template q
-					{LEFT JOIN (locales_quest l) ON l.entry=q.entry AND ?}
+				FROM ?_quest_template q
+					{LEFT JOIN (?_locales_quest l) ON l.entry=q.entry AND ?}
 				WHERE
 					(q.PrevQuestID=?d AND q.entry<>?d)
 					OR q.entry=?d
@@ -136,8 +136,8 @@ if(!$quest = load_cache(10, intval($id)))
 		if (!$quest['closes'] = $DB->select('
 				SELECT q.entry, q.Title
 					{, l.Title_loc?d AS `Title_loc`}
-				FROM quest_template q
-					{LEFT JOIN (locales_quest l) ON l.entry=q.entry AND ?}
+				FROM ?_quest_template q
+					{LEFT JOIN (?_locales_quest l) ON l.entry=q.entry AND ?}
 				WHERE
 					q.ExclusiveGroup=?d AND q.entry<>?d
 				LIMIT 20
@@ -154,8 +154,8 @@ if(!$quest = load_cache(10, intval($id)))
 	if(!$quest['reqone'] = $DB->select('
 				SELECT q.entry, q.Title
 					{, l.Title_loc?d AS `Title_loc`}
-				FROM quest_template q
-					{LEFT JOIN (locales_quest l) ON l.entry=q.entry AND ?}
+				FROM ?_quest_template q
+					{LEFT JOIN (?_locales_quest l) ON l.entry=q.entry AND ?}
 				WHERE
 					q.ExclusiveGroup>0 AND q.NextQuestId=?d
 				LIMIT 20
@@ -172,8 +172,8 @@ if(!$quest = load_cache(10, intval($id)))
 	if(!$quest['enables'] = $DB->select('
 				SELECT q.entry, q.Title
 					{, l.Title_loc?d AS `Title_loc`}
-				FROM quest_template q
-					{LEFT JOIN (locales_quest l) ON l.entry=q.entry AND ?}
+				FROM ?_quest_template q
+					{LEFT JOIN (?_locales_quest l) ON l.entry=q.entry AND ?}
 				WHERE q.PrevQuestID=?d
 				LIMIT 20
 				',
@@ -190,8 +190,8 @@ if(!$quest = load_cache(10, intval($id)))
 		if(!$quest['enabledby'] = $DB->select('
 				SELECT q.entry, q.Title
 					{, l.Title_loc?d AS `Title_loc`}
-				FROM quest_template q
-					{LEFT JOIN (locales_quest l) ON l.entry=q.entry AND ?}
+				FROM ?_quest_template q
+					{LEFT JOIN (?_locales_quest l) ON l.entry=q.entry AND ?}
 				WHERE q.entry=?d
 				LIMIT 20
 				',
@@ -233,7 +233,7 @@ if(!$quest = load_cache(10, intval($id)))
 		
 		// TODO: skill localization
 		$quest['reqskill'] = array(
-			'name' => $DB->selectCell('SELECT name_loc'.$_SESSION['locale'].' FROM ?_skill WHERE skillID=?d LIMIT 1',$quest['SkillOrClass']),
+			'name' => $DB->selectCell('SELECT name_loc'.$_SESSION['locale'].' FROM udwbase_skill WHERE skillID=?d LIMIT 1',$quest['SkillOrClass']),
 			'value' => $quest['RequiredSkillValue']
 		);
 	}
@@ -244,13 +244,13 @@ if(!$quest = load_cache(10, intval($id)))
 	// Требуемые отношения с фракциями, что бы начать квест
 	if ($quest['RequiredMinRepFaction'] && $quest['RequiredMinRepValue'])
 		$quest['RequiredMinRep'] = array(
-			'name' => $DB->selectCell('SELECT name_loc'.$_SESSION['locale'].' FROM ?_factions WHERE factionID=?d LIMIT 1', $quest['RequiredMinRepFaction']),
+			'name' => $DB->selectCell('SELECT name_loc'.$_SESSION['locale'].' FROM udwbase_factions WHERE factionID=?d LIMIT 1', $quest['RequiredMinRepFaction']),
 			'entry' => $quest['RequiredMinRepFaction'],
 			'value' => $reputations[$quest['RequiredMinRepValue']]
 		);
 	if ($quest['RequiredMaxRepFaction'] && $quest['RequiredMaxRepValue'])
 		$quest['RequiredMaxRep'] = array(
-			'name' => $DB->selectCell('SELECT name_loc'.$_SESSION['locale'].' FROM ?_factions WHERE factionID=?d LIMIT 1', $quest['RequiredMaxRepFaction']),
+			'name' => $DB->selectCell('SELECT name_loc'.$_SESSION['locale'].' FROM udwbase_factions WHERE factionID=?d LIMIT 1', $quest['RequiredMaxRepFaction']),
 			'entry' => $quest['RequiredMaxRepFaction'],
 			'value' => $reputations[$quest['RequiredMaxRepValue']]
 		);
@@ -263,7 +263,7 @@ if(!$quest = load_cache(10, intval($id)))
 	{
 		$tmp = $DB->selectRow('
 			SELECT ?#, s.spellname_loc'.$_SESSION['locale'].'
-			FROM ?_spell s, ?_spellicons si
+			FROM udwbase_spell s, udwbase_spellicons si
 			WHERE
 				s.spellID=?d
 				AND si.id=s.spellicon
@@ -286,7 +286,7 @@ if(!$quest = load_cache(10, intval($id)))
 	{
 		$tmp = $DB->SelectRow('
 			SELECT ?#, s.spellname_loc'.$_SESSION['locale'].'
-			FROM ?_spell s, ?_spellicons si
+			FROM udwbase_spell s, udwbase_spellicons si
 			WHERE
 				s.spellID=?d
 				AND si.id=s.spellicon
@@ -334,7 +334,7 @@ if(!$quest = load_cache(10, intval($id)))
 			// Спелл
 			if ($quest['ReqSpellCast'.$i])
 				$quest['coreqs'][$i]['spell'] = array(
-					'name' => $DB->selectCell('SELECT spellname_loc'.$_SESSION['locale'].' FROM ?_spell WHERE spellid=?d LIMIT 1', $quest['ReqSpellCast'.$i]),
+					'name' => $DB->selectCell('SELECT spellname_loc'.$_SESSION['locale'].' FROM udwbase_spell WHERE spellid=?d LIMIT 1', $quest['ReqSpellCast'.$i]),
 					'entry' => $quest['ReqSpellCast'.$i]
 				);
 		}
@@ -356,7 +356,7 @@ if(!$quest = load_cache(10, intval($id)))
 	if($quest['RepObjectiveFaction']>0 && $quest['RepObjectiveValue']>0)
 	{
 		$quest['factionreq'] = array(
-			'name' => $DB->selectCell('SELECT name_loc'.$_SESSION['locale'].' FROM ?_factions WHERE factionID=?d LIMIT 1', $quest['RepObjectiveFaction']),
+			'name' => $DB->selectCell('SELECT name_loc'.$_SESSION['locale'].' FROM udwbase_factions WHERE factionID=?d LIMIT 1', $quest['RepObjectiveFaction']),
 			'entry' => $quest['RepObjectiveFaction'],
 			'value' => $reputations[$quest['RepObjectiveValue']]
 		);
@@ -369,8 +369,8 @@ if(!$quest = load_cache(10, intval($id)))
 	$rows = $DB->select('
 		SELECT c.entry, c.name, A, H
 			{, l.name_loc?d as `name_loc`}
-		FROM creature_questrelation q, ?_factiontemplate, creature_template c
-			{LEFT JOIN (locales_creature l) ON l.entry=c.entry AND ?}
+		FROM ?_creature_questrelation q, udwbase_factiontemplate, ?_creature_template c
+			{LEFT JOIN (?_locales_creature l) ON l.entry=c.entry AND ?}
 		WHERE
 			q.quest=?d
 			AND c.entry=q.id
@@ -399,8 +399,8 @@ if(!$quest = load_cache(10, intval($id)))
 	$rows = $DB->select('
 		SELECT g.entry, g.name
 			{, l.name_loc?d as `name_loc`}
-		FROM gameobject_questrelation q, gameobject_template g
-			{LEFT JOIN (locales_gameobject l) ON l.entry = g.entry AND ?}
+		FROM ?_gameobject_questrelation q, ?_gameobject_template g
+			{LEFT JOIN (?_locales_gameobject l) ON l.entry = g.entry AND ?}
 		WHERE
 			q.quest=?d
 			AND g.entry=q.id
@@ -424,8 +424,8 @@ if(!$quest = load_cache(10, intval($id)))
 	$rows = $DB->select('
 		SELECT i.name, i.entry, i.quality, LOWER(a.iconname) AS iconname
 			{, l.name_loc?d as `name_loc`}
-		FROM ?_icons a, item_template i
-			{LEFT JOIN (locales_item l) ON l.entry=i.entry AND ?}
+		FROM udwbase_icons a, ?_item_template i
+			{LEFT JOIN (?_locales_item l) ON l.entry=i.entry AND ?}
 		WHERE
 			startquest = ?d
 			AND id = displayid
@@ -450,8 +450,8 @@ if(!$quest = load_cache(10, intval($id)))
 	$rows = $DB->select('
 		SELECT c.entry, c.name, A, H
 			{, l.name_loc?d as `name_loc`}
-		FROM creature_involvedrelation q, ?_factiontemplate, creature_template c
-			{LEFT JOIN (locales_creature l) ON l.entry=c.entry AND ?}
+		FROM ?_creature_involvedrelation q, udwbase_factiontemplate, ?_creature_template c
+			{LEFT JOIN (?_locales_creature l) ON l.entry=c.entry AND ?}
 		WHERE
 			q.quest=?d
 			AND c.entry=q.id
@@ -480,8 +480,8 @@ if(!$quest = load_cache(10, intval($id)))
 	$rows = $DB->select('
 		SELECT g.entry, g.name
 			{, l.name_loc?d as `name_loc`}
-		FROM gameobject_involvedrelation q, gameobject_template g
-			{LEFT JOIN (locales_gameobject l) ON l.entry = g.entry AND ?}
+		FROM ?_gameobject_involvedrelation q, ?_gameobject_template g
+			{LEFT JOIN (?_locales_gameobject l) ON l.entry = g.entry AND ?}
 		WHERE
 			q.quest=?d
 			AND g.entry=q.id

@@ -59,8 +59,8 @@ function objectinfo($id, $level=0)
 	$row = $DB->selectRow('
 			SELECT g.?#
 				{, l.name_loc?d AS `name_loc`}
-			FROM gameobject_template g
-				{LEFT JOIN (locales_gameobject l) ON l.entry=g.entry AND ?d}
+			FROM ?_gameobject_template g
+				{LEFT JOIN (?_locales_gameobject l) ON l.entry=g.entry AND ?d}
 			WHERE g.entry = ?d
 			LIMIT 1
 		',
@@ -363,7 +363,7 @@ function objectinfo2(&$Row, $level=0)
 		{
 			$lock_row = $DB->selectRow('
 				SELECT *
-				FROM ?_lock
+				FROM udwbase_lock
 				WHERE lockID=?d
 				LIMIT 1
 				',
@@ -380,7 +380,7 @@ function objectinfo2(&$Row, $level=0)
 						case 1:
 							// Ключ
 							$object['key'] = array();
-							$object['key'] = $DB->selectRow('SELECT entry as id, name, quality FROM item_template WHERE entry=?d LIMIT 1', $lock_row['lockproperties'.$j]);
+							$object['key'] = $DB->selectRow('SELECT entry as id, name, quality FROM ?_item_template WHERE entry=?d LIMIT 1', $lock_row['lockproperties'.$j]);
 							break;
 						case 2:
 							// Скилл
@@ -413,8 +413,8 @@ function objectinfo2(&$Row, $level=0)
 				$row = $DB->selectRow('
 						SELECT text, next_page
 							{, text_loc?d}
-						FROM page_text p
-							{LEFT JOIN (locales_page_text l) ON l.entry = p.entry AND ?}
+						FROM ?_page_text p
+							{LEFT JOIN (?_locales_page_text l) ON l.entry = p.entry AND ?}
 						WHERE
 							p.entry = ?d
 						LIMIT 1
@@ -425,11 +425,11 @@ function objectinfo2(&$Row, $level=0)
 				);
 				/*
 				if($_SESSION['locale']>0)
-					$text = QuestReplaceStr($DB->selectCell('SELECT Text_loc?d FROM locales_page_text WHERE entry = ?d LIMIT 1', $_SESSION['locale'], $object['pageid']));
+					$text = QuestReplaceStr($DB->selectCell('SELECT Text_loc?d FROM ?_locales_page_text WHERE entry = ?d LIMIT 1', $_SESSION['locale'], $object['pageid']));
 				if($text)
-					$next_page = $DB->selectCell('SELECT next_page FROM page_text WHERE entry = ?d LIMIT 1', $object['pageid']);
+					$next_page = $DB->selectCell('SELECT next_page FROM ?_page_text WHERE entry = ?d LIMIT 1', $object['pageid']);
 				else
-					list($text, $next_page) = $DB->selectRow('SELECT text AS \'0\', next_page AS \'1\' FROM page_text WHERE entry = ?d LIMIT 1', $object['pageid']);
+					list($text, $next_page) = $DB->selectRow('SELECT text AS \'0\', next_page AS \'1\' FROM ?_page_text WHERE entry = ?d LIMIT 1', $object['pageid']);
 				*/
 				$row['text'] = QuestReplaceStr(!empty($row['text_loc']) ? $row['text_loc'] : $row['text']);
 				if(empty($row['text']))

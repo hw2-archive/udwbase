@@ -14,20 +14,29 @@ $lang  = $_SESSION['locale'];
 
 if ($board<0)
 {
-    switch ($board) :
-	case -1:
-	    header('Location: http://forum.vanilla-wiki.org/dload.php?action=category&cat_id=1');
-	    break;
+	switch ($lang) :
+		// english
+		case 0:
+			switch ($board) :
+			// tools
+				case -1:
+					header('Location: http://yourboardurl');
+				break;
+			endswitch;
     endswitch;
 }
 else
     switch ($lang) :
+		//english
 	    case 0:
 		    //wow general
-		    header('Location: http://forum.vanilla-wiki.org/viewforum.php?f='.$board);
-		    break;
+			switch ($board):
+				case 0:
+					header('Location: http://yourboardurl');
+				break;
+			endswitch;
 	    default:
-		    header('Location: http://forum.vanilla-wiki.org/viewforum.php?f='.$board);
+		    header('Location: Location: http://yourboardurl');
 		    break;
     endswitch;
 

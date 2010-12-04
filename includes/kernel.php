@@ -45,8 +45,7 @@ function CheckPwd($username, &$shapass,$isSession=false)
 	require_once 'includes/DbSimple/Generic.php';
 	global $rDB;
 	global $UDWBaseconf;
-	// [for realmd] $user_row = $rDB->selectRow('SELECT id, sha_pass_hash, gmlevel FROM account WHERE username=? LIMIT 1', $username);
-	$user_row = $rDB->selectRow('SELECT user_id, user_password, user_level FROM vanillaip_users WHERE username=? LIMIT 1', $username);
+	$user_row = $rDB->selectRow('SELECT id, sha_pass_hash, gmlevel FROM ?_account WHERE username=? LIMIT 1', $username);
         if ($user_row)
 	{
 		/*[for realmd]if ($shapass==$user_row['sha_pass_hash'])

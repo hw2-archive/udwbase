@@ -35,7 +35,7 @@ if(!$spell = load_cache(13, intval($id)))
 	// Данные об спелле:
 	$row = $DB->selectRow('
 		SELECT s.*, i.iconname
-		FROM ?_spell s, ?_spellicons i
+		FROM udwbase_spell s, udwbase_spellicons i
 		WHERE
 			s.spellID=?
 			AND i.id = s.spellicon
@@ -59,14 +59,14 @@ if(!$spell = load_cache(13, intval($id)))
 		// Уровень спелла
 		$spell['level'] = $row['levelspell'];
 		// Дальность
-		$RangeRow = $DB->selectRow('SELECT rangeMin, rangeMax, name_loc'.$_SESSION['locale'].' from ?_spellrange where rangeID=? limit 1', $row['rangeID']);
+		$RangeRow = $DB->selectRow('SELECT rangeMin, rangeMax, name_loc'.$_SESSION['locale'].' from udwbase_spellrange where rangeID=? limit 1', $row['rangeID']);
 		$spell['range'] = '';
 		if (($RangeRow['rangeMin'] != $RangeRow['rangeMax']) and ($RangeRow['rangeMin'] != 0))
 			$spell['range'] = $RangeRow['rangeMin'].'-';
 		$spell['range'] .= $RangeRow['rangeMax'];
 		$spell['rangename'] = $RangeRow['name_loc'.$_SESSION['locale']];
 		// Время каста
-		$casttime = $DB->selectCell('SELECT base from ?_spellcasttimes where id=? limit 1', $row['spellcasttimesID']);
+		$casttime = $DB->selectCell('SELECT base from udwbase_spellcasttimes where id=? limit 1', $row['spellcasttimesID']);
 		if ($casttime>0)
 			$spell['casttime'] = ($casttime/1000).' '.$smarty->get_config_vars('seconds');
 		else if($row['ChannelInterruptFlags'])
@@ -77,19 +77,19 @@ if(!$spell = load_cache(13, intval($id)))
 		if ($row['cooldown']>0)
 			$spell['cooldown'] = $row['cooldown'] / 1000;
 		// Время действия спелла
-		$duration = $DB->selectCell('SELECT durationBase FROM ?_spellduration WHERE durationID=?d LIMIT 1', $row['durationID']);
+		$duration = $DB->selectCell('SELECT durationBase FROM udwbase_spellduration WHERE durationID=?d LIMIT 1', $row['durationID']);
 		if ($duration > 0)
 			$spell['duration'] = ($duration/1000).' '.$smarty->get_config_vars('seconds');
 		else
 			$spell['duration'] ='<span class="q0">n/a</span>';
 		// Школа спелла
-		$spell['school'] = $DB->selectCell('SELECT name_loc'.$_SESSION['locale'].' FROM ?_resistances WHERE id=?d LIMIT 1', $row['resistancesID']);
+		$spell['school'] = $DB->selectCell('SELECT name_loc'.$_SESSION['locale'].' FROM udwbase_resistances WHERE id=?d LIMIT 1', $row['resistancesID']);
 		// Тип диспела
 		if ($row['dispeltypeID'])
-			$spell['dispel'] = $DB->selectCell('SELECT name_loc'.$_SESSION['locale'].' FROM ?_spelldispeltype WHERE id=?d LIMIT 1', $row['dispeltypeID']);
+			$spell['dispel'] = $DB->selectCell('SELECT name_loc'.$_SESSION['locale'].' FROM udwbase_spelldispeltype WHERE id=?d LIMIT 1', $row['dispeltypeID']);
 		// Механика спелла
 		if ($row['mechanicID'])
-			$spell['mechanic'] = $DB->selectCell('SELECT name_loc'.$_SESSION['locale'].' FROM ?_spellmechanic WHERE id=?d LIMIT 1', $row['mechanicID']);
+			$spell['mechanic'] = $DB->selectCell('SELECT name_loc'.$_SESSION['locale'].' FROM udwbase_spellmechanic WHERE id=?d LIMIT 1', $row['mechanicID']);
 
 		// Информация о спелле
 		$spell['info'] = allspellsinfo2($row, 2);
@@ -103,7 +103,7 @@ if(!$spell = load_cache(13, intval($id)))
 			{
 				$spell['tools'][$i] = array();
 				// Имя инструмента
-				$tool_row = $DB->selectRow('SELECT ?#, `quality` FROM item_template, ?_icons WHERE entry=?d AND id=displayid LIMIT 1', $item_cols[0], $row['tool'.$j]);
+				$tool_row = $DB->selectRow('SELECT ?#, `quality` FROM ?_item_template, udwbase_icons WHERE entry=?d AND id=displayid LIMIT 1', $item_cols[0], $row['tool'.$j]);
 				$spell['tools'][$i]['name'] = $tool_row['name'];
 				$spell['tools'][$i]['quality'] = $tool_row['quality'];
 				// ID инструмента
@@ -126,8 +126,8 @@ if(!$spell = load_cache(13, intval($id)))
 				$reagentrow = $DB->selectRow('
 					SELECT c.?#, name
 					{ ,l.name_loc?d as `name_loc` }
-					FROM ?_icons, item_template c
-					{ LEFT JOIN (locales_item l) ON l.entry=c.entry AND ? }
+					FROM udwbase_icons, ?_item_template c
+					{ LEFT JOIN (?_locales_item l) ON l.entry=c.entry AND ? }
 					WHERE
 						c.entry=?d
 						AND id=displayid
@@ -178,13 +178,13 @@ if(!$spell = load_cache(13, intval($id)))
 						{
 							$spell['effect'][$i]['object'] = array();
 							$spell['effect'][$i]['object']['entry'] = $row['effect'.$j.'MiscValue'];
-							$spell['effect'][$i]['object']['name'] = $DB->selectCell("SELECT name FROM gameobject_template WHERE entry=? LIMIT 1", $spell['effect'][$i]['object']['entry']).' ('.$spell['effect'][$i]['object']['entry'].')';
+							$spell['effect'][$i]['object']['name'] = $DB->selectCell("SELECT name FROM ?_gameobject_template WHERE entry=? LIMIT 1", $spell['effect'][$i]['object']['entry']).' ('.$spell['effect'][$i]['object']['entry'].')';
 							break;
 						}
 						// скиллы
 						case 118: // "Require Skill"
 						{
-							$spell['effect'][$i]['name'] .= ' ('.$DB->selectCell('SELECT name FROM ?_skill WHERE skillID=? LIMIT 1', $row['effect'.$j.'MiscValue']).')';
+							$spell['effect'][$i]['name'] .= ' ('.$DB->selectCell('SELECT name FROM udwbase_skill WHERE skillID=? LIMIT 1', $row['effect'.$j.'MiscValue']).')';
 							break;
 						}
 						// ауры
@@ -213,7 +213,7 @@ if(!$spell = load_cache(13, intval($id)))
 					$spell['effect'][$i]['name'] .= ' ('.$spell['school'].')';
 				// Радиус действия эффекта
 				if ($row['effect'.$j.'radius'])
-					$spell['effect'][$i]['radius'] = $DB->selectCell("SELECT radiusbase from ?_spellradius where radiusID=? limit 1", $row['effect'.$j.'radius']);
+					$spell['effect'][$i]['radius'] = $DB->selectCell("SELECT radiusbase from udwbase_spellradius where radiusID=? limit 1", $row['effect'.$j.'radius']);
 				// Значение спелла (урон)
 				if ($row['effect'.$j.'BasePoints'] && !$row['effect'.$j.'itemtype'])
 					$spell['effect'][$i]['value'] = $row['effect'.$j.'BasePoints'] + 1;
@@ -247,8 +247,8 @@ if(!$spell = load_cache(13, intval($id)))
 					$tmpRow = $DB->selectRow('
 							SELECT c.?#, name
 							{ ,l.name_loc?d as `name_loc` }
-							FROM ?_icons, item_template c
-							{ LEFT JOIN (locales_item l) ON l.entry=c.entry AND ? }
+							FROM udwbase_icons, ?_item_template c
+							{ LEFT JOIN (?_locales_item l) ON l.entry=c.entry AND ? }
 							WHERE
 								c.entry=?d
 								AND id=displayid
@@ -272,7 +272,7 @@ if(!$spell = load_cache(13, intval($id)))
 				{
 					$spell['effect'][$i]['spell'] = array();
 					$spell['effect'][$i]['spell']['entry'] = $row['effect'.$j.'triggerspell'];
-					$spell['effect'][$i]['spell']['name'] = $DB->selectCell('SELECT spellname_loc'.$_SESSION['locale'].' FROM ?_spell WHERE spellID=?d LIMIT 1', $spell['effect'][$i]['spell']['entry']);
+					$spell['effect'][$i]['spell']['name'] = $DB->selectCell('SELECT spellname_loc'.$_SESSION['locale'].' FROM udwbase_spell WHERE spellID=?d LIMIT 1', $spell['effect'][$i]['spell']['entry']);
 					allspellsinfo($spell['effect'][$i]['spell']['entry']);
 				}
 				$i++;
@@ -285,7 +285,7 @@ if(!$spell = load_cache(13, intval($id)))
 		// Спеллы с таким же названием
 		$seealso = $DB->select('
 			SELECT s.*, i.iconname
-			FROM ?_spell s, ?_spellicons i
+			FROM udwbase_spell s, udwbase_spellicons i
 			WHERE
 				s.spellname_loc'.$_SESSION['locale'].' = ?
 				AND s.spellID <> ?d
@@ -316,10 +316,10 @@ if(!$spell = load_cache(13, intval($id)))
 		$taughtbytrainers = $DB->select('
 			SELECT ?#, c.entry
 			{ , name_loc?d AS name_loc, subname_loc'.$_SESSION['locale'].' AS subname_loc }
-			FROM ?_factiontemplate, creature_template c
-			{ LEFT JOIN (locales_creature l) ON c.entry = l.entry AND ? }
+			FROM udwbase_factiontemplate, ?_creature_template c
+			{ LEFT JOIN (?_locales_creature l) ON c.entry = l.entry AND ? }
 			WHERE
-				c.entry IN (SELECT entry FROM npc_trainer WHERE spell=?d)
+				c.entry IN (SELECT entry FROM ?_npc_trainer WHERE spell=?d)
 				AND factiontemplateID=faction_A
 			',
 			$npc_cols[0],
@@ -339,8 +339,8 @@ if(!$spell = load_cache(13, intval($id)))
 		$taughtbyitem = $DB->select('
 			SELECT ?#, c.entry
 			{ , name_loc?d AS name_loc }
-			FROM ?_icons, item_template c
-			{ LEFT JOIN (locales_item l) ON c.entry = l.entry AND ? }
+			FROM udwbase_icons, ?_item_template c
+			{ LEFT JOIN (?_locales_item l) ON c.entry = l.entry AND ? }
 			WHERE
 				((spellid_2=?d)
 				AND (spelltrigger_2=6))
@@ -361,7 +361,7 @@ if(!$spell = load_cache(13, intval($id)))
 		// Список спеллов, обучающих этому спеллу:
 		$taughtbyspells = $DB->selectCol('
 			SELECT spellID
-			FROM ?_spell
+			FROM udwbase_spell
 			WHERE
 				(effect1triggerspell=?d AND (effect1id=57 OR effect1id=36))
 				OR (effect2triggerspell=?d AND (effect2id=57 OR effect2id=36))
@@ -376,10 +376,10 @@ if(!$spell = load_cache(13, intval($id)))
 			$taughtbypets = $DB->select('
 				SELECT ?#, c.entry
 				{ , name_loc?d AS name_loc, subname_loc'.$_SESSION['locale'].' AS subname_loc }
-				FROM ?_factiontemplate, creature_template c
-				{ LEFT JOIN (locales_creature l) ON c.entry = l.entry AND ? }
+				FROM udwbase_factiontemplate, ?_creature_template c
+				{ LEFT JOIN (?_locales_creature l) ON c.entry = l.entry AND ? }
 				WHERE
-					c.entry IN (SELECT entry FROM petcreateinfo_spell WHERE (Spell1 IN (?a)) OR (Spell2 IN (?a)) OR (Spell3 IN (?a)) OR (Spell4 IN (?a)))
+					c.entry IN (SELECT entry FROM ?_petcreateinfo_spell WHERE (Spell1 IN (?a)) OR (Spell2 IN (?a)) OR (Spell3 IN (?a)) OR (Spell4 IN (?a)))
 					AND factiontemplateID=faction_A
 				',
 				$npc_cols[0],
@@ -399,8 +399,8 @@ if(!$spell = load_cache(13, intval($id)))
 			$taughtbyquest = $DB->select('
 				SELECT c.?#
 				{ , Title_loc?d AS Title_loc }
-				FROM quest_template c
-				{ LEFT JOIN (locales_quest l) ON c.entry = l.entry AND ? }
+				FROM ?_quest_template c
+				{ LEFT JOIN (?_locales_quest l) ON c.entry = l.entry AND ? }
 				WHERE
 					RewSpell IN (?a) OR RewSpellCast IN (?a)
 				',
@@ -421,10 +421,10 @@ if(!$spell = load_cache(13, intval($id)))
 			$taughtbytrainers = $DB->select('
 				SELECT ?#, c.entry
 				{ , name_loc?d AS name_loc, subname_loc'.$_SESSION['locale'].' AS subname_loc }
-				FROM ?_factiontemplate, creature_template c
-				{ LEFT JOIN (locales_creature l) ON c.entry = l.entry AND ? }
+				FROM udwbase_factiontemplate, ?_creature_template c
+				{ LEFT JOIN (?_locales_creature l) ON c.entry = l.entry AND ? }
 				WHERE
-					c.entry IN (SELECT entry FROM npc_trainer WHERE spell in (?a))
+					c.entry IN (SELECT entry FROM ?_npc_trainer WHERE spell in (?a))
 					AND factiontemplateID=faction_A
 				',
 				$npc_cols[0],
@@ -443,8 +443,8 @@ if(!$spell = load_cache(13, intval($id)))
 			$taughtbyitem = $DB->select('
 				SELECT ?#, c.entry
 				{ , name_loc?d AS name_loc }
-				FROM ?_icons, item_template c
-				{ LEFT JOIN (locales_item l) ON c.entry = l.entry AND ? }
+				FROM udwbase_icons, ?_item_template c
+				{ LEFT JOIN (?_locales_item l) ON c.entry = l.entry AND ? }
 				WHERE
 					((spellid_1 IN (?a))
 					OR (spellid_2 IN (?a))
@@ -470,8 +470,8 @@ if(!$spell = load_cache(13, intval($id)))
 		$usedbynpc = $DB->select('
 			SELECT ?#, c.entry
 			{ , name_loc?d AS name_loc, subname_loc'.$_SESSION['locale'].' AS subname_loc }
-			FROM ?_factiontemplate, creature_template c
-			{ LEFT JOIN (locales_creature l) ON c.entry = l.entry AND ? }
+			FROM udwbase_factiontemplate, ?_creature_template c
+			{ LEFT JOIN (?_locales_creature l) ON c.entry = l.entry AND ? }
 			WHERE
 				(spell1=?d
 				OR spell2=?d
@@ -496,8 +496,8 @@ if(!$spell = load_cache(13, intval($id)))
 		$usedbyitem = $DB->select('
 			SELECT ?#, c.entry
 			{ , name_loc?d AS name_loc }
-			FROM ?_icons, item_template c
-			{ LEFT JOIN (locales_item l) ON c.entry = l.entry AND ? }
+			FROM udwbase_icons, ?_item_template c
+			{ LEFT JOIN (?_locales_item l) ON c.entry = l.entry AND ? }
 			WHERE
 				(spellid_1=?d OR (spellid_2=?d AND spelltrigger_2!=6) OR spellid_3=?d OR spellid_4=?d OR spellid_5=?d)
 				AND id=displayID
@@ -518,7 +518,7 @@ if(!$spell = load_cache(13, intval($id)))
 		// Используется наборами вещей:
 		$usedbyitemset = $DB->select('
 			SELECT *
-			FROM ?_itemset
+			FROM udwbase_itemset
 			WHERE spell1=?d or spell2=?d or spell3=?d or spell4=?d or spell5=?d or spell6=?d or spell7=?d or spell8=?d
 			',
 			$spell['entry'], $spell['entry'], $spell['entry'], $spell['entry'], $spell['entry'], $spell['entry'], $spell['entry'], $spell['entry']
@@ -535,8 +535,8 @@ if(!$spell = load_cache(13, intval($id)))
 		$questreward = $DB->select('
 			SELECT c.?#
 			{ , Title_loc?d AS Title_loc }
-			FROM quest_template c
-			{ LEFT JOIN (locales_quest l) ON c.entry = l.entry AND ? }
+			FROM ?_quest_template c
+			{ LEFT JOIN (?_locales_quest l) ON c.entry = l.entry AND ? }
 			WHERE
 				RewSpell=?d
 				OR RewSpellCast=?d

@@ -33,7 +33,7 @@ if(!$object = load_cache(3, intval($id)))
 	// Начиниают квесты...
 	$rows_qs = $DB->select('
 		SELECT o.?#
-		FROM gameobject_questrelation q, quest_template o
+		FROM ?_gameobject_questrelation q, ?_quest_template o
 		WHERE
 			q.id = ?d
 			AND o.entry = q.quest
@@ -52,7 +52,7 @@ if(!$object = load_cache(3, intval($id)))
 	// Заканчивают квесты...
 	$rows_qe = $DB->select('
 		SELECT ?#
-		FROM gameobject_involvedrelation i, quest_template q
+		FROM ?_gameobject_involvedrelation i, ?_quest_template q
 		WHERE
 			i.id = ?d
 			AND q.entry = i.quest

@@ -21,12 +21,12 @@ if (($_REQUEST['account']=='signup') and (isset($_POST['username'])) and (isset(
 		$smarty->assign('signup_error', $smarty->get_config_vars('Different_passwords'));
 	} else {
 		// Существует ли уже такой пользователь?
-		if ($rDB->selectCell('SELECT Count(id) FROM account WHERE username=? LIMIT 1', $_POST['username']) == 1)
+		if ($rDB->selectCell('SELECT Count(id) FROM ?_account WHERE username=? LIMIT 1', $_POST['username']) == 1)
 		{
 			$smarty->assign('signup_error', $smarty->get_config_vars('Such_user_exists'));
 		} else {
 			// Вроде все нормально, создаем аккаунт
-			$success = $rDB->selectCell('INSERT INTO account(`username`, `sha_pass_hash`, `email`, `joindate`, `expansion`, `last_ip`)
+			$success = $rDB->selectCell('INSERT INTO ?_account(`username`, `sha_pass_hash`, `email`, `joindate`, `expansion`, `last_ip`)
 				VALUES (?, ?, ?, NOW(), ?, ?)',
 				$_POST['username'],
 				create_usersend_pass($_POST['username'], $_POST['password']),
@@ -93,7 +93,7 @@ switch($_REQUEST['account']):
 	case 'signup_false':
 	case 'signup':
 		// Регистрация аккаунта
-		header( 'Location: http://forum.vanilla-wiki.org/profile.php?mode=register' ) ;
+		header( 'Location: http://your_realm_regpage' );
 		break;
 	case 'signout':
 		// Выход из пользователя

@@ -34,8 +34,8 @@ if(!$npcs = load_cache(2, $cache_str))
 			, l.name_loc?d as `name_loc`
 			, l.subname_loc'.$_SESSION['locale'].' as `subname_loc`
 		}
-		FROM ?_factiontemplate, creature_template c
-		{ LEFT JOIN (locales_creature l) ON l.entry=c.entry AND ? }
+		FROM udwbase_factiontemplate, ?_creature_template c
+		{ LEFT JOIN (?_locales_creature l) ON l.entry=c.entry AND ? }
 		WHERE 1=1
 			{AND type=?}
 			{AND family=?}

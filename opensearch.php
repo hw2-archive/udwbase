@@ -55,7 +55,7 @@ function SideByRace($race)
 // Ищем вещи:
 $rows = $DB->select('
 	SELECT i.entry, ?#, iconname, quality
-	FROM ?_icons a, item_template i{, ?# l}
+	FROM udwbase_icons a, ?_item_template i{, ?# l}
 	WHERE
 		?# LIKE ?
 		AND a.id = i.displayid
@@ -81,7 +81,7 @@ foreach ($rows as $i => $row)
 // Ищем объекты:
 $rows = $DB->select('
 	SELECT entry, name
-	FROM gameobject_template
+	FROM ?_gameobject_template
 	WHERE
 		(name LIKE ?)
 	ORDER BY name
@@ -99,7 +99,7 @@ foreach ($rows as $i => $row)
 // Ищем квесты:
 $rows = $DB->select('
 	SELECT entry, Title, RequiredRaces
-	FROM quest_template
+	FROM ?_quest_template
 	WHERE
 		(Title LIKE ?)
 	ORDER BY Title
@@ -118,7 +118,7 @@ foreach ($rows as $i => $row)
 // Ищем creature:
 $rows = $DB->select('
 	SELECT entry, name
-	FROM creature_template
+	FROM ?_creature_template
 	WHERE
 		(name LIKE ?)
 	ORDER BY name

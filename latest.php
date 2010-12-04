@@ -28,35 +28,34 @@ switch($_GET['latest'])
 			switch($row['type'])
 			{
 				case 1: // NPC
-					$comments[$i]['subject'] = $DB->selectCell('SELECT name FROM creature_template WHERE entry=?d LIMIT 1', $row['typeID']);
+					$comments[$i]['subject'] = $DB->selectCell('SELECT name FROM ?_creature_template WHERE entry=?d LIMIT 1', $row['typeID']);
 					break;
 				case 2: // GO
-					$comments[$i]['subject'] = $DB->selectCell('SELECT name FROM gameobject_template WHERE entry=?d LIMIT 1', $row['typeID']);
+					$comments[$i]['subject'] = $DB->selectCell('SELECT name FROM ?_gameobject_template WHERE entry=?d LIMIT 1', $row['typeID']);
 					break;
 				case 3: // Item
-					$comments[$i]['subject'] = $DB->selectCell('SELECT name FROM item_template WHERE entry=?d LIMIT 1', $row['typeID']);
+					$comments[$i]['subject'] = $DB->selectCell('SELECT name FROM ?_item_template WHERE entry=?d LIMIT 1', $row['typeID']);
 					break;
 				case 4: // Item Set
-					$comments[$i]['subject'] = $DB->selectCell('SELECT name FROM ?_itemset WHERE itemsetID=?d LIMIT 1', $row['typeID']);
+					$comments[$i]['subject'] = $DB->selectCell('SELECT name FROM udwbase_itemset WHERE itemsetID=?d LIMIT 1', $row['typeID']);
 					break;
 				case 5: // Quest
-					$comments[$i]['subject'] = $DB->selectCell('SELECT Title FROM quest_template WHERE entry=?d LIMIT 1', $row['typeID']);
+					$comments[$i]['subject'] = $DB->selectCell('SELECT Title FROM ?_quest_template WHERE entry=?d LIMIT 1', $row['typeID']);
 					break;
 				case 6: // Spell
-					$comments[$i]['subject'] = $DB->selectCell('SELECT spellname_loc'.$_SESSION['locale'].' FROM ?_spell WHERE spellID=?d LIMIT 1', $row['typeID']);
+					$comments[$i]['subject'] = $DB->selectCell('SELECT spellname_loc'.$_SESSION['locale'].' FROM udwbase_spell WHERE spellID=?d LIMIT 1', $row['typeID']);
 					break;
 				case 7: // Zone
 					// TODO
 					break;
 				case 8: // Faction
-					$comments[$i]['subject'] = $DB->selectCell('SELECT name_loc'.$_SESSION['locale'].' FROM ?_factions WHERE factionID=?d LIMIT 1', $row['typeID']);
+					$comments[$i]['subject'] = $DB->selectCell('SELECT name_loc'.$_SESSION['locale'].' FROM udwbase_factions WHERE factionID=?d LIMIT 1', $row['typeID']);
 					break;
 				default:
-					$comments[$i]['subject'] = $DB->selectCell('SELECT name FROM '.$types[$row['type']].'_template WHERE entry=?d LIMIT 1', $row['typeID']);
+					$comments[$i]['subject'] = $DB->selectCell('SELECT name FROM ?_'.$types[$row['type']].'_template WHERE entry=?d LIMIT 1', $row['typeID']);
 					break;
 			}
-			//$comments[$i]['user'] = $rDB->selectCell('SELECT username FROM account WHERE id=?d LIMIT 1', $row['user']);
-			$comments[$i]['user'] = $rDB->selectCell('SELECT username FROM vanillaip_users WHERE user_id=?d LIMIT 1', $row['user']);
+			$comments[$i]['user'] = $rDB->selectCell('SELECT username FROM ?_account WHERE id=?d LIMIT 1', $row['user']);
                         if(empty($comments[$i]['user']))
 				$comments[$i]['user'] = 'Anonymous';
 			$comments[$i]['rating'] = array_sum($DB->selectCol('SELECT rate FROM ?_comments_rates WHERE commentid=?d', $row['id']));

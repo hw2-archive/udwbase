@@ -18,7 +18,7 @@ function getcomments($type, $typeid)
 
 	$rows = $DB->select('
 		SELECT id, userid, post_date, commentbody, replyto
-		FROM ?_comments
+		FROM udwbase_comments
 		WHERE type=? AND typeid=?
 		ORDER BY replyto, post_date
 		',
@@ -30,8 +30,7 @@ function getcomments($type, $typeid)
 	foreach($rows as $i=>$row)
 	{
 		$comments[$i] = array();
-		//$comments[$i] = $rDB->selectRow('SELECT username as user, gmlevel as roles FROM account WHERE id=? LIMIT 1', $row['userid']);
-		$comments[$i] = $rDB->selectRow('SELECT username as user, user_level as roles FROM vanillaip_users WHERE user_id=? LIMIT 1', $row['userid']);
+		$comments[$i] = $rDB->selectRow('SELECT username as user, gmlevel as roles FROM ?_account WHERE id=? LIMIT 1', $row['userid']);
                 if (!(IsSet($comments[$i]['user'])))
 			$comments[$i]['user'] = "Anonymous";
 		$comments[$i]['number'] = $i;

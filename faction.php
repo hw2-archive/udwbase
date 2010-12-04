@@ -32,7 +32,7 @@ if(!$faction = load_cache(18, intval($id)))
 
 	$row = $DB->selectRow('
 			SELECT factionID, name_loc'.$_SESSION['locale'].', description1_loc'.$_SESSION['locale'].', description2_loc'.$_SESSION['locale'].', team, side
-			FROM ?_factions
+			FROM udwbase_factions
 			WHERE factionID=?d
 			LIMIT 1
 		',
@@ -51,7 +51,7 @@ if(!$faction = load_cache(18, intval($id)))
 		$faction['description2'] = $row['description2_loc'.$_SESSION['locale']];
 		// Команда/Группа фракции
 		if($row['team']!=0)
-			$faction['group'] = $DB->selectCell('SELECT name_loc'.$_SESSION['locale'].' FROM ?_factions WHERE factionID=?d LIMIT 1', $row['team']);
+			$faction['group'] = $DB->selectCell('SELECT name_loc'.$_SESSION['locale'].' FROM udwbase_factions WHERE factionID=?d LIMIT 1', $row['team']);
 		// Альянс(1)/Орда(2)
 		if($row['side']!=0)
 			$faction['side'] = $row['side'];
@@ -59,7 +59,7 @@ if(!$faction = load_cache(18, intval($id)))
 		// Итемы с requiredreputationfaction
 		$item_rows = $DB->select('
 			SELECT ?#, entry
-			FROM item_template i, ?_icons a
+			FROM ?_item_template i, udwbase_icons a
 			WHERE
 				i.RequiredReputationFaction=?d
 				AND a.id=i.displayid
@@ -78,9 +78,9 @@ if(!$faction = load_cache(18, intval($id)))
 		// Персонажи, состоящие во фракции
 		$creature_rows = $DB->select('
 			SELECT ?#, entry
-			FROM creature_template, ?_factiontemplate
+			FROM ?_creature_template, udwbase_factiontemplate
 			WHERE
-				faction_A IN (SELECT factiontemplateID FROM ?_factiontemplate WHERE factionID=?d)
+				faction_A IN (SELECT factiontemplateID FROM udwbase_factiontemplate WHERE factionID=?d)
 				AND factiontemplateID=faction_A
 			',
 			$npc_cols[0],
@@ -97,7 +97,7 @@ if(!$faction = load_cache(18, intval($id)))
 		// Квесты для этой фракции
 		$quests_rows = $DB->select('
 			SELECT ?#
-			FROM quest_template
+			FROM ?_quest_template
 			WHERE
 				RewRepFaction1=?d
 				OR RewRepFaction2=?d

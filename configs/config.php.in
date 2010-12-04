@@ -6,17 +6,18 @@ $UDWBaseconf['world']['host']	= '127.0.0.1';
 $UDWBaseconf['world']['user']	= 'udwbase';
 $UDWBaseconf['world']['pass']	= '';
 $UDWBaseconf['world']['db']		= 'world';
-$UDWBaseconf['world']['udwbase']	= 'udwbase_';
+$UDWBaseconf['world']['world_prefix']	= ''; // optional table prefix
 // -- Realmd Database --
 $UDWBaseconf['realmd']['host']	= '127.0.0.1';
 $UDWBaseconf['realmd']['user']	= 'udwbase';
 $UDWBaseconf['realmd']['pass']	= '';
 $UDWBaseconf['realmd']['db']		= 'realmd';
+$UDWBaseconf['realmd']['realmd_prefix']	= ''; // optional table prefix
 // Site Configuration
 $UDWBaseconf['udwbase']['name'] = 'UDWBase';
 $UDWBaseconf['udwbase']['template'] = 'wowhead';
 $UDWBaseconf['udwbase']['cache_time'] = (60*60*24*7); // Time to keep cache in seconds (Default: 1 week)
-$UDWBaseconf['locale'] = 8;
+$UDWBaseconf['locale'] = 0;
 $UDWBaseconf['register'] = false;
 $UDWBaseconf['expansion'] = 2; // Used with register
 $UDWBaseconf['limit'] = 300;

@@ -26,7 +26,7 @@ switch($_REQUEST["comment"]):
 		// $_POST['replyto'] - номер поста, на который отвечает
 		// $_SESSION['userid'] - номер пользователя
 		$newid = $DB->query('INSERT
-			INTO ?_comments(`type`, `typeid`, `userid`, `commentbody`, `post_date`{, ?#})
+			INTO udwbase_comments(`type`, `typeid`, `userid`, `commentbody`, `post_date`{, ?#})
 			VALUES (?d, ?d, ?d, ?, NOW(){, ?d})',
 			(empty($_POST['replyto'])? DBSIMPLE_SKIP : 'replyto'),
 			$_GET["type"],
@@ -36,7 +36,7 @@ switch($_REQUEST["comment"]):
 			(empty($_POST['replyto'])? DBSIMPLE_SKIP : $_POST['replyto'])
 		);
 		if (empty($_POST['replyto']))
-			$DB->query('UPDATE ?_comments SET `replyto`=?d WHERE `id`=?d LIMIT 1', $newid, $newid);
+			$DB->query('UPDATE udwbase_comments SET `replyto`=?d WHERE `id`=?d LIMIT 1', $newid, $newid);
 		echo '<meta http-equiv="Refresh" content="0; URL=?'.urlfromtype($_GET["type"], $_GET["typeid"]).'">';
 		echo '<style type="text/css">';
 		echo 'body {background-color: black;}';
@@ -46,7 +46,7 @@ switch($_REQUEST["comment"]):
 		// Удаление комментарий (Ajax)
 		// Номер комментария: $_GET['id']
 		// Имя пользователя, удаляющего комментарий: $_GET['username']
-		$DB->query('DELETE FROM ?_comments WHERE `id`=?d {AND `userid`=?d} LIMIT 1',
+		$DB->query('DELETE FROM udwbase_comments WHERE `id`=?d {AND `userid`=?d} LIMIT 1',
 			$_GET['id'],
 			($_SESSION['roles']>1)? DBSIMPLE_SKIP : $_SESSION['userid']
 			);
@@ -57,7 +57,7 @@ switch($_REQUEST["comment"]):
 		// Новое содержание комментария: $_POST['body']
 		// Номер пользователя: $_SESSION['userid']
 		if (IsSet($_POST['body']))
-			$DB->query('UPDATE ?_comments SET `commentbody`=?, `edit_userid`=?, `edit_date`=NOW() WHERE `id`=?d {AND `userid`=?d} LIMIT 1',
+			$DB->query('UPDATE udwbase_comments SET `commentbody`=?, `edit_userid`=?, `edit_date`=NOW() WHERE `id`=?d {AND `userid`=?d} LIMIT 1',
 			stripslashes($_POST['body']), $_SESSION['userid'], $_GET['id'],
 			($_SESSION['roles']>1)? DBSIMPLE_SKIP : $_SESSION['userid']
 			);
@@ -71,8 +71,8 @@ switch($_REQUEST["comment"]):
 		* Номер пользователя: $_SESSION['userid']
 		*/
 		// Проверка на хоть какое то значение рейтинга, и на то, что пользователь за этот коммент не голосовал
-		if (IsSet($_GET['rating']) and !($DB->selectCell('SELECT `commentid` FROM ?_comments_rates WHERE `userid`=?d AND `commentid`=?d LIMIT 1', $_SESSION['userid'], $_GET['id'])))
-			$DB->query('INSERT INTO ?_comments_rates(`commentid`, `userid`, `rate`) VALUES (?d, ?d, ?d)',
+		if (IsSet($_GET['rating']) and !($DB->selectCell('SELECT `commentid` FROM udwbase_comments_rates WHERE `userid`=?d AND `commentid`=?d LIMIT 1', $_SESSION['userid'], $_GET['id'])))
+			$DB->query('INSERT INTO udwbase_comments_rates(`commentid`, `userid`, `rate`) VALUES (?d, ?d, ?d)',
 				$_GET['id'], $_SESSION['userid'], $_GET['rating']);
 		break;
 	case 'undelete':

@@ -45,7 +45,7 @@ if($_SESSION['locale']>0)
 {
 	$tmp = $DB->select('
 			SELECT entry
-			FROM locales_item
+			FROM ?_locales_item
 			WHERE name_loc?d LIKE ?
 		',
 		$_SESSION['locale'],
@@ -60,8 +60,8 @@ if($_SESSION['locale']>0)
 $rows = $DB->select('
 		SELECT i.?#
 			{, l.name_loc?d AS `name_loc`}
-		FROM ?_icons a, item_template i
-			{LEFT JOIN (locales_item l) ON l.entry=i.entry AND ?d}
+		FROM udwbase_icons a, ?_item_template i
+			{LEFT JOIN (?_locales_item l) ON l.entry=i.entry AND ?d}
 		WHERE
 			(i.name LIKE ? {OR i.entry IN (?a)})
 			AND a.id = i.displayid;
@@ -83,7 +83,7 @@ if($_SESSION['locale']>0)
 {
 	$tmp = $DB->select('
 			SELECT entry
-			FROM locales_creature
+			FROM ?_locales_creature
 			WHERE
 				name_loc?d LIKE ?
 				OR subname_loc?d LIKE ?
@@ -100,8 +100,8 @@ $rows = $DB->select('
 		SELECT ?#, c.entry
 			{, l.name_loc?d AS `name_loc`,
 			l.subname_loc'.($_SESSION['locale']).' AS `subname_loc`}
-		FROM ?_factiontemplate, creature_template c
-			{LEFT JOIN (locales_creature l) ON l.entry=c.entry AND ?d}
+		FROM udwbase_factiontemplate, ?_creature_template c
+			{LEFT JOIN (?_locales_creature l) ON l.entry=c.entry AND ?d}
 		WHERE
 			(name LIKE ?
 			OR subname LIKE ?
@@ -125,7 +125,7 @@ if($_SESSION['locale']>0)
 {
 	$tmp = $DB->select('
 			SELECT entry
-			FROM locales_gameobject
+			FROM ?_locales_gameobject
 			WHERE
 				name_loc?d LIKE ?
 		',
@@ -139,8 +139,8 @@ if($_SESSION['locale']>0)
 $rows = $DB->select('
 		SELECT g.?#
 			{, l.name_loc?d AS `name_loc`}
-		FROM gameobject_template g
-			{LEFT JOIN (locales_gameobject l) ON l.entry=g.entry AND ?d}
+		FROM ?_gameobject_template g
+			{LEFT JOIN (?_locales_gameobject l) ON l.entry=g.entry AND ?d}
 		WHERE name LIKE ? {OR g.entry IN (?a)}
 	',
 	$object_cols[0],
@@ -160,7 +160,7 @@ if($_SESSION['locale']>0)
 {
 	$tmp = $DB->select('
 			SELECT entry
-			FROM locales_quest
+			FROM ?_locales_quest
 			WHERE
 				Title_loc?d LIKE ?
 		',
@@ -174,8 +174,8 @@ if($_SESSION['locale']>0)
 $rows = $DB->select('
 		SELECT *
 			{, l.Title_loc?d AS `Title_loc`}
-		FROM quest_template q
-			{LEFT JOIN (locales_quest l) ON l.entry=q.entry AND ?d}
+		FROM ?_quest_template q
+			{LEFT JOIN (?_locales_quest l) ON l.entry=q.entry AND ?d}
 		WHERE Title LIKE ? {OR q.entry IN (?a)}
 	',
 	($m)? $_SESSION['locale']: DBSIMPLE_SKIP,
@@ -192,7 +192,7 @@ foreach ($rows as $numRow=>$row)
 // Ищем наборы вещей
 $rows = $DB->select('
 		SELECT *
-		FROM ?_itemset
+		FROM udwbase_itemset
 		WHERE name_loc'.$_SESSION['locale'].' LIKE ?
 	',
 	$nsearch
@@ -203,7 +203,7 @@ foreach ($rows as $numRow=>$row)
 // Ищем спеллы
 $rows = $DB->select('
 		SELECT ?#, spellID
-		FROM ?_spell s, ?_spellicons i
+		FROM udwbase_spell s, udwbase_spellicons i
 		WHERE
 			s.spellname_loc'.$_SESSION['locale'].' like ?
 			AND i.id = s.spellicon

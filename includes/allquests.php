@@ -168,8 +168,8 @@ function GetQuestReq($id, $count, $type)
 			$row = $DB->selectRow('
 					SELECT name
 						{, l.name_loc?d AS name_loc}
-					FROM creature_template c
-						{ LEFT JOIN (locales_creature l) ON l.entry=c.entry AND ? }
+					FROM ?_creature_template c
+						{ LEFT JOIN (?_locales_creature l) ON l.entry=c.entry AND ? }
 					WHERE
 						c.entry = ?d
 					LIMIT 1
@@ -185,8 +185,8 @@ function GetQuestReq($id, $count, $type)
 			$row = $DB->selectRow('
 					SELECT name
 						{, l.name_loc?d AS name_loc}
-					FROM item_template c
-						{ LEFT JOIN (locales_item l) ON l.entry=c.entry AND ? }
+					FROM ?_item_template c
+						{ LEFT JOIN (?_locales_item l) ON l.entry=c.entry AND ? }
 					WHERE
 						c.entry = ?d
 					LIMIT 1
@@ -264,7 +264,7 @@ function GetQuestDBLocale($quest)
 				ObjectiveText2_loc?d	AS ObjectiveText2,
 				ObjectiveText3_loc?d	AS ObjectiveText3,
 				ObjectiveText4_loc?d	AS ObjectiveText4
-			FROM locales_quest
+			FROM ?_locales_quest
 			WHERE entry = ?d
 			LIMIT 1
 		',
@@ -285,7 +285,7 @@ function GetDBQuestInfo($id, $dataflag = QUEST_DATAFLAG_MINIMUM)
 			SELECT
 				1
 				{, ?# } {, ?# } {, ?# } {, ?# } {, ?# }
-			FROM quest_template
+			FROM ?_quest_template
 			WHERE entry=?d
 			LIMIT 1
 		',
@@ -321,7 +321,7 @@ function GetQuestInfo(&$data, $dataflag = QUEST_DATAFLAG_MINIMUM)
 				SELECT
 					1
 					{, ?# } {, ?# } {, ?# } {, ?# } {, ?# }
-				FROM quest_template
+				FROM ?_quest_template
 				WHERE entry=?d
 				LIMIT 1
 			',
@@ -353,7 +353,7 @@ function GetQuestInfo(&$data, $dataflag = QUEST_DATAFLAG_MINIMUM)
 					ObjectiveText2_loc?d	AS ObjectiveText2_loc,
 					ObjectiveText3_loc?d	AS ObjectiveText3_loc,
 					ObjectiveText4_loc?d	AS ObjectiveText4_loc
-				FROM locales_quest
+				FROM ?_locales_quest
 				WHERE entry = ?d
 				LIMIT 1
 			',
@@ -412,7 +412,7 @@ function GetQuestInfo(&$data, $dataflag = QUEST_DATAFLAG_MINIMUM)
 		if($data['SpecialFlags'] & QUEST_SPECIALFLAGS_REPEATABLE)
 			$data['Repeatable'] = true;
 		if($data['CharTitleId']>0)
-			$data['titlereward'] = $DB->selectCell('SELECT name FROM ?_char_titles WHERE id=?d LIMIT 1', $row['CharTitleId']);
+			$data['titlereward'] = $DB->selectCell('SELECT name FROM udwbase_char_titles WHERE id=?d LIMIT 1', $row['CharTitleId']);
 	}
 
 	// Награды и задания

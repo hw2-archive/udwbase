@@ -22,7 +22,7 @@ if(!$itemset = load_cache(8, intval($id)))
 {
 	unset($itemset);
 
-	$row = $DB->selectRow("SELECT * FROM ?_itemset WHERE itemsetID=? LIMIT 1", $id);
+	$row = $DB->selectRow("SELECT * FROM udwbase_itemset WHERE itemsetID=? LIMIT 1", $id);
 	if ($row) {
 		$itemset = array();
 		$itemset['entry'] = $row['itemsetID'];

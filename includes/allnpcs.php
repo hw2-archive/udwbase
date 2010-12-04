@@ -50,9 +50,9 @@ function creatureinfo($id)
 			, l.subname_loc'.$_SESSION['locale'].' as `subname_loc`
 			, ?
 		}
-		FROM ?_factiontemplate, creature_template c
+		FROM udwbase_factiontemplate, ?_creature_template c
 		{
-			LEFT JOIN (locales_creature l)
+			LEFT JOIN (?_locales_creature l)
 			ON l.entry=c.entry AND ?
 		}
 		WHERE

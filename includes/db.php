@@ -17,10 +17,10 @@ require_once 'includes/DbSimple/Generic.php';
 // Массив настроек
 global $UDWBaseconf;
 
-// Подключение к БД мангос (версия 3 :) )
+// Connect to world DB 
 $DB = DbSimple_Generic::connect("mysql://".$UDWBaseconf['world']['user'].":".$UDWBaseconf['world']['pass']."@".$UDWBaseconf['world']['host']."/".$UDWBaseconf['world']['db']);
 $DB->setErrorHandler('databaseErrorHandler');
-$DB->setIdentPrefix($UDWBaseconf['world']['udwbase']);
+$DB->setIdentPrefix($UDWBaseconf['world']['udwbase_prefix']);
 $DB->query('SET NAMES ?', 'utf8');
 // Подключение к БД realmd
 if($UDWBaseconf['realmd'])

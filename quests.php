@@ -27,7 +27,7 @@ if(!$quests = load_cache(12, $cache_str))
 
 	$rows = $DB->select('
 		SELECT ?#
-		FROM quest_template q
+		FROM ?_quest_template q
 		WHERE
 			1 = 1
 			{ AND ZoneOrSort = ? }
