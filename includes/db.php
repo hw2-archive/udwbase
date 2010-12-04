@@ -20,13 +20,14 @@ global $UDWBaseconf;
 // Connect to world DB 
 $DB = DbSimple_Generic::connect("mysql://".$UDWBaseconf['world']['user'].":".$UDWBaseconf['world']['pass']."@".$UDWBaseconf['world']['host']."/".$UDWBaseconf['world']['db']);
 $DB->setErrorHandler('databaseErrorHandler');
-$DB->setIdentPrefix($UDWBaseconf['world']['udwbase_prefix']);
+$DB->setIdentPrefix($UDWBaseconf['world']['table_prefix']);
 $DB->query('SET NAMES ?', 'utf8');
 // Подключение к БД realmd
 if($UDWBaseconf['realmd'])
 {
 	$rDB = DbSimple_Generic::connect("mysql://".$UDWBaseconf['realmd']['user'].":".$UDWBaseconf['realmd']['pass']."@".$UDWBaseconf['realmd']['host']."/".$UDWBaseconf['realmd']['db']);
 	$rDB->setErrorHandler('databaseErrorHandler');
+	$rDB->setIdentPrefix($UDWBaseconf['realmd']['table_prefix']);
 	$rDB->query('SET NAMES ?', 'utf8');
 }
 // Код обработчика ошибок SQL.
