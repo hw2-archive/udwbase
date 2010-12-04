@@ -18,7 +18,7 @@ function getcomments($type, $typeid)
 
 	$rows = $DB->select('
 		SELECT id, userid, post_date, commentbody, replyto
-		FROM udwbase_comments
+		FROM ?_udwbase_comments
 		WHERE type=? AND typeid=?
 		ORDER BY replyto, post_date
 		',

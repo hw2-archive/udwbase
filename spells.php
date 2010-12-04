@@ -32,7 +32,7 @@ if(!$spells = load_cache(15, $cache_str))
 		// Классовые
 		$rows = $DB->select('
 				SELECT ?#, s.`spellID`, sk.skillID
-				FROM udwbase_spell s, udwbase_skill_line_ability sla, udwbase_spellicons i, udwbase_skill sk
+				FROM ?_udwbase_spell s, ?_udwbase_skill_line_ability sla, ?_udwbase_spellicons i, ?_udwbase_skill sk
 				WHERE
 					s.spellID = sla.spellID
 					AND s.levelspell >= 1
@@ -78,7 +78,7 @@ if(!$spells = load_cache(15, $cache_str))
 			SELECT
 				?#, `s`.`spellID`,
 				sla.skillID, sla.min_value, sla.max_value
-			FROM udwbase_spell s, udwbase_skill_line_ability sla, udwbase_spellicons i, udwbase_skill sk
+			FROM ?_udwbase_spell s, ?_udwbase_skill_line_ability sla, ?_udwbase_spellicons i, ?_udwbase_skill sk
 			WHERE
 				s.spellID = sla.spellID
 				AND i.id=s.spellicon
@@ -103,7 +103,7 @@ if(!$spells = load_cache(15, $cache_str))
 		$rows = $DB->select('
 				SELECT
 					?#, `s`.`spellID`, sk.skillID
-				FROM udwbase_spell s, udwbase_skill_line_ability sla, udwbase_spellicons i, udwbase_skill sk
+				FROM ?_udwbase_spell s, ?_udwbase_skill_line_ability sla, ?_udwbase_spellicons i, ?_udwbase_skill sk
 				WHERE
 					s.spellID = sla.spellID
 					AND s.levelspell > 0
@@ -127,9 +127,9 @@ if(!$spells = load_cache(15, $cache_str))
 		$rows = $DB->select('
 			SELECT
 				?#, `s`.`spellID`
-			FROM udwbase_spell s, udwbase_spellicons i
+			FROM ?_udwbase_spell s, ?_udwbase_spellicons i
 			WHERE
-				s.spellID IN (SELECT spellID FROM udwbase_skill_line_ability WHERE racemask>0)
+				s.spellID IN (SELECT spellID FROM ?_udwbase_skill_line_ability WHERE racemask>0)
 				AND i.id=s.spellicon
 			{LIMIT ?d}
 			',
@@ -148,7 +148,7 @@ if(!$spells = load_cache(15, $cache_str))
 		$rows = $DB->select('
 			SELECT
 				?#, `s`.`spellID`
-			FROM udwbase_spell s, udwbase_spellicons i
+			FROM ?_udwbase_spell s, ?_udwbase_spellicons i
 			WHERE
 				i.id=s.spellicon
 			{LIMIT ?d}

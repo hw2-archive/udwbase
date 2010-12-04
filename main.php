@@ -10,7 +10,7 @@
 */
 
 	// Загружаем новости
-	$rows = @$DB->select('SELECT text_loc?d AS text FROM udwbase_news ORDER BY time DESC, id DESC LIMIT 5', $_SESSION['locale']);
+	$rows = @$DB->select('SELECT text_loc?d AS text FROM ?_udwbase_news ORDER BY time DESC, id DESC LIMIT 5', $_SESSION['locale']);
 	if($rows)
 		$smarty->assign('news', $rows);
 

@@ -412,7 +412,7 @@ function GetQuestInfo(&$data, $dataflag = QUEST_DATAFLAG_MINIMUM)
 		if($data['SpecialFlags'] & QUEST_SPECIALFLAGS_REPEATABLE)
 			$data['Repeatable'] = true;
 		if($data['CharTitleId']>0)
-			$data['titlereward'] = $DB->selectCell('SELECT name FROM udwbase_char_titles WHERE id=?d LIMIT 1', $row['CharTitleId']);
+			$data['titlereward'] = $DB->selectCell('SELECT name FROM ?_udwbase_char_titles WHERE id=?d LIMIT 1', $row['CharTitleId']);
 	}
 
 	// Награды и задания

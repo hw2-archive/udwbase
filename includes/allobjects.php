@@ -363,7 +363,7 @@ function objectinfo2(&$Row, $level=0)
 		{
 			$lock_row = $DB->selectRow('
 				SELECT *
-				FROM udwbase_lock
+				FROM ?_udwbase_lock
 				WHERE lockID=?d
 				LIMIT 1
 				',

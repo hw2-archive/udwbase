@@ -60,7 +60,7 @@ if($_SESSION['locale']>0)
 $rows = $DB->select('
 		SELECT i.?#
 			{, l.name_loc?d AS `name_loc`}
-		FROM udwbase_icons a, ?_item_template i
+		FROM ?_udwbase_icons a, ?_item_template i
 			{LEFT JOIN (?_locales_item l) ON l.entry=i.entry AND ?d}
 		WHERE
 			(i.name LIKE ? {OR i.entry IN (?a)})
@@ -100,7 +100,7 @@ $rows = $DB->select('
 		SELECT ?#, c.entry
 			{, l.name_loc?d AS `name_loc`,
 			l.subname_loc'.($_SESSION['locale']).' AS `subname_loc`}
-		FROM udwbase_factiontemplate, ?_creature_template c
+		FROM ?_udwbase_factiontemplate, ?_creature_template c
 			{LEFT JOIN (?_locales_creature l) ON l.entry=c.entry AND ?d}
 		WHERE
 			(name LIKE ?
@@ -192,7 +192,7 @@ foreach ($rows as $numRow=>$row)
 // Ищем наборы вещей
 $rows = $DB->select('
 		SELECT *
-		FROM udwbase_itemset
+		FROM ?_udwbase_itemset
 		WHERE name_loc'.$_SESSION['locale'].' LIKE ?
 	',
 	$nsearch
@@ -203,7 +203,7 @@ foreach ($rows as $numRow=>$row)
 // Ищем спеллы
 $rows = $DB->select('
 		SELECT ?#, spellID
-		FROM udwbase_spell s, udwbase_spellicons i
+		FROM ?_udwbase_spell s, ?_udwbase_spellicons i
 		WHERE
 			s.spellname_loc'.$_SESSION['locale'].' like ?
 			AND i.id = s.spellicon

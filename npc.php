@@ -37,7 +37,7 @@ if(!$npc = load_cache(1, intval($id)))
 				?,
 			}
 			f.name_loc'.$_SESSION['locale'].' as `faction-name`, ft.factionID as `factionID`
-		FROM udwbase_factiontemplate ft, udwbase_factions f, ?_creature_template c
+		FROM ?_udwbase_factiontemplate ft, ?_udwbase_factions f, ?_creature_template c
 		{
 			LEFT JOIN (?_locales_creature l)
 			ON l.entry=c.entry AND ?
@@ -160,9 +160,9 @@ if(!$npc = load_cache(1, intval($id)))
 				{
 					$spellrow = $DB->selectRow('
 						SELECT ?#, spellID
-						FROM udwbase_spell, udwbase_spellicons
+						FROM ?_udwbase_spell, ?_udwbase_spellicons
 						WHERE
-							spellID=(SELECT effect'.$k.'triggerspell FROM udwbase_spell WHERE spellID=?d AND (effect'.$k.'id IN (36,57)))
+							spellID=(SELECT effect'.$k.'triggerspell FROM ?_udwbase_spell WHERE spellID=?d AND (effect'.$k.'id IN (36,57)))
 							AND id=spellicon
 						LIMIT 1
 						',
@@ -182,7 +182,7 @@ if(!$npc = load_cache(1, intval($id)))
 	// Если это просто тренер
 	$teachspells = $DB->select('
 		SELECT ?#, spellID
-		FROM ?_npc_trainer, udwbase_spell, udwbase_spellicons
+		FROM ?_npc_trainer, ?_udwbase_spell, ?_udwbase_spellicons
 		WHERE
 			entry=?d
 			AND spellID=Spell
@@ -208,7 +208,7 @@ if(!$npc = load_cache(1, intval($id)))
 	$rows_s = $DB->select('
 		SELECT ?#, i.entry, i.maxcount, n.`maxcount` as `drop-maxcount`
 			{, l.name_loc?d AS `name_loc`}
-		FROM ?_npc_vendor n, udwbase_icons, ?_item_template i
+		FROM ?_npc_vendor n, ?_udwbase_icons, ?_item_template i
 			{LEFT JOIN (?_locales_item l) ON l.entry=i.entry AND ?d}
 		WHERE
 			n.entry=?
@@ -231,7 +231,7 @@ if(!$npc = load_cache(1, intval($id)))
 			$npc['sells'][$numRow]['cost'] = array();
 			/* if ($row['ExtendedCost']) [NOTE] overwrite with honor points? 
 			{
-				$extcost = $DB->selectRow('SELECT * FROM udwbase_item_extended_cost WHERE extendedcostID=?d LIMIT 1', $row['ExtendedCost']);
+				$extcost = $DB->selectRow('SELECT * FROM ?_udwbase_item_extended_cost WHERE extendedcostID=?d LIMIT 1', $row['ExtendedCost']);
 				if ($extcost['reqhonorpoints']>0)
 					$npc['sells'][$numRow]['cost']['honor'] = (($npc['A']==1)? 1: -1) * $extcost['reqhonorpoints'];
 				if ($extcost['reqarenapoints']>0)

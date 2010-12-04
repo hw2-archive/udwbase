@@ -25,7 +25,7 @@ if(!$data = load_cache(4, intval($type)))
 	$rows = $DB->select('
 			SELECT g.* {, a.requiredskill1 as ?#} {, a.requiredskill2 as ?#}
 				{, l.name_loc?d AS `name_loc`}
-			FROM {?_gameobject_questrelation ?#, } {udwbase_lock ?#, } gameobject_template g
+			FROM {?_gameobject_questrelation ?#, } {?_udwbase_lock ?#, } gameobject_template g
 				{LEFT JOIN (?_locales_gameobject l) ON l.entry=g.entry AND ?d}
 			WHERE 
 				name != ""

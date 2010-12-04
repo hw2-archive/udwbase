@@ -24,7 +24,7 @@ if(!$itemsets = load_cache(9, 'x'))
 
 	$rows = $DB->select('
 		SELECT ?#
-		FROM udwbase_itemset
+		FROM ?_udwbase_itemset
 		ORDER by name_loc'.$_SESSION['locale'].'
 		{LIMIT ?d}',
 		$itemset_col[0],

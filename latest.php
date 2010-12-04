@@ -37,19 +37,19 @@ switch($_GET['latest'])
 					$comments[$i]['subject'] = $DB->selectCell('SELECT name FROM ?_item_template WHERE entry=?d LIMIT 1', $row['typeID']);
 					break;
 				case 4: // Item Set
-					$comments[$i]['subject'] = $DB->selectCell('SELECT name FROM udwbase_itemset WHERE itemsetID=?d LIMIT 1', $row['typeID']);
+					$comments[$i]['subject'] = $DB->selectCell('SELECT name FROM ?_udwbase_itemset WHERE itemsetID=?d LIMIT 1', $row['typeID']);
 					break;
 				case 5: // Quest
 					$comments[$i]['subject'] = $DB->selectCell('SELECT Title FROM ?_quest_template WHERE entry=?d LIMIT 1', $row['typeID']);
 					break;
 				case 6: // Spell
-					$comments[$i]['subject'] = $DB->selectCell('SELECT spellname_loc'.$_SESSION['locale'].' FROM udwbase_spell WHERE spellID=?d LIMIT 1', $row['typeID']);
+					$comments[$i]['subject'] = $DB->selectCell('SELECT spellname_loc'.$_SESSION['locale'].' FROM ?_udwbase_spell WHERE spellID=?d LIMIT 1', $row['typeID']);
 					break;
 				case 7: // Zone
 					// TODO
 					break;
 				case 8: // Faction
-					$comments[$i]['subject'] = $DB->selectCell('SELECT name_loc'.$_SESSION['locale'].' FROM udwbase_factions WHERE factionID=?d LIMIT 1', $row['typeID']);
+					$comments[$i]['subject'] = $DB->selectCell('SELECT name_loc'.$_SESSION['locale'].' FROM ?_udwbase_factions WHERE factionID=?d LIMIT 1', $row['typeID']);
 					break;
 				default:
 					$comments[$i]['subject'] = $DB->selectCell('SELECT name FROM ?_'.$types[$row['type']].'_template WHERE entry=?d LIMIT 1', $row['typeID']);

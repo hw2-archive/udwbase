@@ -204,7 +204,7 @@ function coord_db2wow($mapid, $x, $y, $global)
 	// Подключение к базе
 	global $DB;
 
-	$rows = $DB->select("SELECT * FROM udwbase_zones WHERE (mapID=? and x_min<? and x_max>? and y_min<? and y_max>?)", $mapid, $x, $x, $y, $y);
+	$rows = $DB->select("SELECT * FROM ?_udwbase_zones WHERE (mapID=? and x_min<? and x_max>? and y_min<? and y_max>?)", $mapid, $x, $x, $y, $y);
 
 	foreach ($rows as $numRow=>$row) {
 		// Сохраяняем имя карты и координаты
@@ -240,7 +240,7 @@ function coord_db2wow($mapid, $x, $y, $global)
 	{
 		// Ничего не найдено. Мб инста??
 
-		$row = $DB->selectRow("SELECT * FROM udwbase_zones WHERE (mapID=? and x_min=0 and x_max=0 and y_min=0 and y_max=0)", $mapid);
+		$row = $DB->selectRow("SELECT * FROM ?_udwbase_zones WHERE (mapID=? and x_min=0 and x_max=0 and y_min=0 and y_max=0)", $mapid);
 		if ($row) {
 			$wow['zone'] = $row['areatableID'];
 			$wow['name'] = $row['name_loc'.$_SESSION['locale']];
@@ -291,7 +291,7 @@ function mass_coord(&$data)
 function factioninfo($id)
 {
 	global $DB;
-	$faction['name'] = $DB->selectCell('SELECT name_loc'.$_SESSION['locale'].' FROM udwbase_factions WHERE factionID = ?d LIMIT 1', $id);
+	$faction['name'] = $DB->selectCell('SELECT name_loc'.$_SESSION['locale'].' FROM ?_udwbase_factions WHERE factionID = ?d LIMIT 1', $id);
 	$faction['entry'] = $id;
 	return $faction;
 }
@@ -314,7 +314,7 @@ function loot_table($table, $lootid, $max_percent=100)
 		SELECT l.ChanceOrQuestChance, l.mincountOrRef, l.maxcount as `d-max`, l.groupid, ?#, i.entry, i.maxcount
 			{, loc.name_loc?d AS `name_loc`}
 		FROM ?_?# l
-			LEFT JOIN (udwbase_icons a, ?_item_template i) ON l.item=i.entry AND a.id=i.displayid
+			LEFT JOIN (?_udwbase_icons a, ?_item_template i) ON l.item=i.entry AND a.id=i.displayid
 			{LEFT JOIN (?_locales_item loc) ON loc.entry=i.entry AND ?d}
 		WHERE
 			l.entry=?d

@@ -29,7 +29,7 @@ if(!$items = load_cache(7, $cache_str))
 	$rows = $DB->select('
 		SELECT ?#, i.entry, maxcount
 			{, l.name_loc?d AS `name_loc`}
-		FROM udwbase_icons, ?_item_template i
+		FROM ?_udwbase_icons, ?_item_template i
 			{LEFT JOIN (?_locales_item l) ON l.entry=i.entry AND ?d}
 		WHERE
 			id=displayid

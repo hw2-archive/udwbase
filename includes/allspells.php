@@ -304,7 +304,7 @@ function spell_desc($spellid, $type='tooltip')
 	global $spell_cols;
 	$spellRow = $DB->selectRow('
 		SELECT ?#
-		FROM udwbase_spell, udwbase_spellicons
+		FROM ?_udwbase_spell, ?_udwbase_spellicons
 		WHERE
 			spellID=?
 			AND id=spellicon
@@ -320,12 +320,12 @@ function spell_desc2($spellRow, $type='tooltip')
 {
 	global $DB;
 
-//	$spellRow = $DB->selectRow('SELECT s.*, i.iconname FROM udwbase_spell s, udwbase_spellicons i WHERE s.spellID=? AND i.id=s.spellicon LIMIT 1', $spellID);
+//	$spellRow = $DB->selectRow('SELECT s.*, i.iconname FROM ?_udwbase_spell s, ?_udwbase_spellicons i WHERE s.spellID=? AND i.id=s.spellicon LIMIT 1', $spellID);
 
 	allspellsinfo2($spellRow);
 
 	if(!IsSet($spellRow['duration_base']))
-		$lastduration = $DB->selectRow('SELECT * FROM udwbase_spellduration` WHERE durationID=? LIMIT 1', $spellRow['durationID']);
+		$lastduration = $DB->selectRow('SELECT * FROM ?_udwbase_spellduration` WHERE durationID=? LIMIT 1', $spellRow['durationID']);
 
 	$signs = array('+', '-', '/', '*', '%', '^');
 
@@ -370,7 +370,7 @@ function spell_desc2($spellRow, $type='tooltip')
 		{
 			case 'r':
 				if(!IsSet($spellRow['rangeMax']))
-					$spellRow = array_merge($spellRow, $DB->selectRow('SELECT * FROM udwbase_spellrange WHERE rangeID=? LIMIT 1', $spellRow['rangeID']));
+					$spellRow = array_merge($spellRow, $DB->selectRow('SELECT * FROM ?_udwbase_spellrange WHERE rangeID=? LIMIT 1', $spellRow['rangeID']));
 
 				$base = $spellRow['rangeMax'];
 
@@ -386,7 +386,7 @@ function spell_desc2($spellRow, $type='tooltip')
 				break;
 			case 'c':
 				if($lookup > 0)
-					$spell = $DB->selectRow('SELECT * FROM udwbase_spell WHERE spellID=? LIMIT 1', $lookup);
+					$spell = $DB->selectRow('SELECT * FROM ?_udwbase_spell WHERE spellID=? LIMIT 1', $lookup);
 				else
 					$spell = $spellRow;
 
@@ -403,7 +403,7 @@ function spell_desc2($spellRow, $type='tooltip')
 				break;
 			case 's':
 				if($lookup > 0)
-					$spell = $DB->selectRow('SELECT * FROM udwbase_spell WHERE spellID=? LIMIT 1', $lookup);
+					$spell = $DB->selectRow('SELECT * FROM ?_udwbase_spell WHERE spellID=? LIMIT 1', $lookup);
 				else
 					$spell = $spellRow;
 
@@ -422,8 +422,8 @@ function spell_desc2($spellRow, $type='tooltip')
 			case 'o':
 				if($lookup > 0)
 				{
-					$spell = $DB->selectRow('SELECT * FROM udwbase_spell WHERE spellID=? LIMIT 1', $lookup);
-					$lastduration = $DB->selectRow('SELECT * FROM udwbase_spellduration WHERE durationID=? LIMIT 1', $spell['durationID']);
+					$spell = $DB->selectRow('SELECT * FROM ?_udwbase_spell WHERE spellID=? LIMIT 1', $lookup);
+					$lastduration = $DB->selectRow('SELECT * FROM ?_udwbase_spellduration WHERE durationID=? LIMIT 1', $spell['durationID']);
 				}
 				else
 					$spell = $spellRow;
@@ -437,7 +437,7 @@ function spell_desc2($spellRow, $type='tooltip')
 				break;
 			case 't':
 				if($lookup > 0)
-					$spell = $DB->selectRow('SELECT * FROM udwbase_spell WHERE spellID=? LIMIT 1', $lookup);
+					$spell = $DB->selectRow('SELECT * FROM ?_udwbase_spell WHERE spellID=? LIMIT 1', $lookup);
 				else
 					$spell = $spellRow;
 
@@ -458,7 +458,7 @@ function spell_desc2($spellRow, $type='tooltip')
 				break;
 			case 'm':
 				if($lookup > 0)
-					$spell = $DB->selectRow('SELECT * FROM udwbase_spell WHERE spellID=? LIMIT 1', $lookup);
+					$spell = $DB->selectRow('SELECT * FROM ?_udwbase_spell WHERE spellID=? LIMIT 1', $lookup);
 				else
 					$spell = $spellRow;
 
@@ -477,7 +477,7 @@ function spell_desc2($spellRow, $type='tooltip')
 				break;
 			case 'x':
 				if($lookup > 0)
-					$spell = $DB->selectRow('SELECT * FROM udwbase_spell WHERE spellID=? LIMIT 1', $lookup);
+					$spell = $DB->selectRow('SELECT * FROM ?_udwbase_spell WHERE spellID=? LIMIT 1', $lookup);
 				else
 					$spell = $spellRow;
 
@@ -493,7 +493,7 @@ function spell_desc2($spellRow, $type='tooltip')
 				break;
 			case 'q':
 				if($lookup > 0)
-					$spell = $DB->selectRow('SELECT * FROM udwbase_spell WHERE spellID=? LIMIT 1',$lookup);
+					$spell = $DB->selectRow('SELECT * FROM ?_udwbase_spell WHERE spellID=? LIMIT 1',$lookup);
 				else
 					$spell = $spellRow;
 
@@ -511,12 +511,12 @@ function spell_desc2($spellRow, $type='tooltip')
 				break;
 			case 'a':
 				if($lookup > 0)
-					$spell = $DB->selectRow('SELECT * FROM udwbase_spell WHERE spellID=? LIMIT 1', $lookup);
+					$spell = $DB->selectRow('SELECT * FROM ?_udwbase_spell WHERE spellID=? LIMIT 1', $lookup);
 				else
 					$spell = $spellRow;
 
 				$exprData[0] = 1; // TODO
-				$radius = $DB->selectCell('SELECT radiusBase FROM udwbase_spellradius WHERE radiusID=? LIMIT 1', $spell['effect'.$exprData[0].'radius']);
+				$radius = $DB->selectCell('SELECT radiusBase FROM ?_udwbase_spellradius WHERE radiusID=? LIMIT 1', $spell['effect'.$exprData[0].'radius']);
 				$base = $radius;
 
 				if(in_array($op, $signs) && is_numeric($oparg) && is_numeric($base))
@@ -528,7 +528,7 @@ function spell_desc2($spellRow, $type='tooltip')
 				break;
 			case 'h':
 				if($lookup > 0)
-					$spell = $DB->selectRow('SELECT * FROM udwbase_spell WHERE spellID=? LIMIT 1', $lookup);
+					$spell = $DB->selectRow('SELECT * FROM ?_udwbase_spell WHERE spellID=? LIMIT 1', $lookup);
 				else
 					$spell = $spellRow;
 
@@ -543,7 +543,7 @@ function spell_desc2($spellRow, $type='tooltip')
 				break;
 			case 'f':
 				if($lookup > 0)
-					$spell = $DB->selectRow('SELECT * FROM udwbase_spell WHERE spellID=? LIMIT 1', $lookup);
+					$spell = $DB->selectRow('SELECT * FROM ?_udwbase_spell WHERE spellID=? LIMIT 1', $lookup);
 				else
 					$spell = $spellRow;
 
@@ -558,7 +558,7 @@ function spell_desc2($spellRow, $type='tooltip')
 				break;
 			case 'n':
 				if($lookup > 0)
-					$spell = $DB->selectRow('SELECT * FROM udwbase_spell WHERE spellID=? LIMIT 1', $lookup);
+					$spell = $DB->selectRow('SELECT * FROM ?_udwbase_spell WHERE spellID=? LIMIT 1', $lookup);
 				else
 					$spell = $spellRow;
 
@@ -574,7 +574,7 @@ function spell_desc2($spellRow, $type='tooltip')
 			case 'd':
 				if($lookup > 0)
 				{
-					$spell = $DB->selectRow('SELECT durationBase FROM udwbase_spell a, udwbase_spellduration b WHERE a.durationID = b.durationID AND a.spellID=? LIMIT 1', $lookup);
+					$spell = $DB->selectRow('SELECT durationBase FROM ?_udwbase_spell a, ?_udwbase_spellduration b WHERE a.durationID = b.durationID AND a.spellID=? LIMIT 1', $lookup);
 					@$base = ($spell['durationBase'] > 0 ? $spell['durationBase'] + 1 : 0);
 				}
 				else
@@ -599,7 +599,7 @@ function spell_desc2($spellRow, $type='tooltip')
 				break;
 			case 'e':
 				if($lookup > 0)
-					$spell = $DB->selectRow('SELECT * FROM udwbase_spell WHERE spellID=? LIMIT 1', $lookup);
+					$spell = $DB->selectRow('SELECT * FROM ?_udwbase_spell WHERE spellID=? LIMIT 1', $lookup);
 				else
 					$spell = $spellRow;
 				
@@ -626,7 +626,7 @@ function spell_desc2($spellRow, $type='tooltip')
 				break; 
 			case 'u':
 				if($lookup > 0)
-					$spell = $DB->selectRow('SELECT * FROM udwbase_spell WHERE spellID=?d LIMIT 1', $lookup);
+					$spell = $DB->selectRow('SELECT * FROM ?_udwbase_spell WHERE spellID=?d LIMIT 1', $lookup);
 				else
 					$spell = $spellRow;
 					
@@ -644,7 +644,7 @@ function spell_desc2($spellRow, $type='tooltip')
 				break;
 			case 'b': // only used at one spell (14179) should be 20, column 110/111/112?)
 				if($lookup > 0)
-					$spell = $DB->selectRow('SELECT * FROM udwbase_spell WHERE spellID=? LIMIT 1', $lookup);
+					$spell = $DB->selectRow('SELECT * FROM ?_udwbase_spell WHERE spellID=? LIMIT 1', $lookup);
 				else
 					$spell = $spellRow;
 				
@@ -685,9 +685,9 @@ function render_spell_tooltip(&$row)
 
 	// Время каста
 	if($row['spellcasttimesID'] > 1)
-		$casttime = ($DB->selectCell('SELECT base FROM udwbase_spellcasttimes WHERE id=? LIMIT 1', $row['spellcasttimesID']))/1000;
+		$casttime = ($DB->selectCell('SELECT base FROM ?_udwbase_spellcasttimes WHERE id=? LIMIT 1', $row['spellcasttimesID']))/1000;
 	// Дальность действия
-	$range = $DB->selectCell('SELECT rangeMax FROM udwbase_spellrange WHERE rangeID=? LIMIT 1', $row['rangeID']);
+	$range = $DB->selectCell('SELECT rangeMax FROM ?_udwbase_spellrange WHERE rangeID=? LIMIT 1', $row['rangeID']);
 
 	// Реагенты
 	$reagents = array();
@@ -831,7 +831,7 @@ function allspellsinfo2(&$row, $level=0)
 		if(IsSet($allitems[$row['effect1itemtype']]['icon']))
 			$allspells[$num]['icon'] = $allitems[$row['effect1itemtype']]['icon'];
 		else
-			$allspells[$num]['icon'] = $DB->selectCell('SELECT iconname FROM udwbase_icons WHERE id=(SELECT displayid FROM ?_item_template WHERE entry=?d LIMIT 1) LIMIT 1',$row['effect1itemtype']);
+			$allspells[$num]['icon'] = $DB->selectCell('SELECT iconname FROM ?_udwbase_icons WHERE id=(SELECT displayid FROM ?_item_template WHERE entry=?d LIMIT 1) LIMIT 1',$row['effect1itemtype']);
 	} else {
 		$allspells[$num]['icon'] = $row['iconname'];
 	}
@@ -863,7 +863,7 @@ function spell_buff_render($row)
 	// Тип диспела
 	if($row['dispeltypeID'])
 	{
-		$dispel = $DB->selectCell('SELECT name_loc'.$_SESSION['locale'].' FROM udwbase_spelldispeltype WHERE id=? LIMIT 1', $row['dispeltypeID']);
+		$dispel = $DB->selectCell('SELECT name_loc'.$_SESSION['locale'].' FROM ?_udwbase_spelldispeltype WHERE id=? LIMIT 1', $row['dispeltypeID']);
 		$x .= '<th><b class="q">'.$dispel.'</b></th>';
 	}
 	
@@ -875,7 +875,7 @@ function spell_buff_render($row)
 	$x .= spell_desc2($row, 'buff').'<br>';
 	
 	// Длительность баффа
-	$duration = $DB->selectCell("SELECT durationBase FROM udwbase_spellduration WHERE durationID=? LIMIT 1", $row['durationID']);
+	$duration = $DB->selectCell("SELECT durationBase FROM ?_udwbase_spellduration WHERE durationID=? LIMIT 1", $row['durationID']);
 	if($duration>0)
 		$x .= '<span class="q">'.($duration/1000).' seconds remaining</span>';
 	
@@ -893,7 +893,7 @@ function allspellsinfo($id, $level=0)
 		return $allitems[$id];
 	$row = $DB->selectRow('
 		SELECT ?#
-		FROM udwbase_spell s, udwbase_spellicons i
+		FROM ?_udwbase_spell s, ?_udwbase_spellicons i
 		WHERE
 			s.spellID=?
 			AND i.id = s.spellicon
@@ -915,7 +915,7 @@ function spellinfo($id)
 	global $DB;
 	$row = $DB->selectRow('
 		SELECT s.*, i.iconname
-		FROM udwbase_spell s, udwbase_spellicons i
+		FROM ?_udwbase_spell s, ?_udwbase_spellicons i
 		WHERE
 			s.spellID=?
 			AND i.id = s.spellicon
@@ -944,7 +944,7 @@ function spellinfo2(&$row)
 		$spell['cat'] = 0;
 		// Скилл
 //		if(!(isset($row['skillID'])))
-//		$skillrow = list($row['skillID'],$row['req_skill_value'],$row['min_value'],$row['max_value']);//$DB->selectRow('SELECT skillID, req_skill_value, min_value, max_value  FROM udwbase_skill_line_ability WHERE spellID=?d LIMIT 1', $spell['entry']);
+//		$skillrow = list($row['skillID'],$row['req_skill_value'],$row['min_value'],$row['max_value']);//$DB->selectRow('SELECT skillID, req_skill_value, min_value, max_value  FROM ?_udwbase_skill_line_ability WHERE spellID=?d LIMIT 1', $spell['entry']);
 		if(isset($row['skillID']))
 		{
 //			if($skillrow['req_skill_value'] != 1)
@@ -994,7 +994,7 @@ function spellinfo2(&$row)
 				{
 					$createrow = $DB->selectRow('
 						SELECT ?#
-						FROM ?_item_template, udwbase_icons
+						FROM ?_item_template, ?_udwbase_icons
 						WHERE
 							entry=?d
 							AND id=displayid
