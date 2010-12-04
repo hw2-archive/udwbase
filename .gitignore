@@ -9,10 +9,9 @@ config.php
 /images/tmp
 
 # cache directories
-
-cache/armory/*
-cache/world/*
-cache/templates/wowhead/*
+/cache/armory/*.aww
+/cache/world/*.php
+/cache/templates/wowhead/*.php
 
 # popular IDE directories & files
 
