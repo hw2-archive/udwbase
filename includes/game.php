@@ -307,6 +307,7 @@ function loot_table($table, $lootid, $max_percent=100)
 	global $DB;
 	global $loot_groups;
 	global $item_cols;
+        global $UDWBaseconf;
 	$loot = array();
 	$groups = array();
 	// Мего запрос :)
@@ -402,6 +403,7 @@ function loot($table, $lootid)
 function drop($table, $item)
 {
 	global $DB;
+        global $UDWBaseconf;
 	$rows = $DB->select('
 		SELECT l.ChanceOrQuestChance, l.mincountOrRef, l.maxcount, l.entry
 		FROM '. $table. ' l
@@ -424,7 +426,7 @@ function drop($table, $item)
 			$drop[$num]['maxcount'] = $row['maxcount'];
 			
 			// We are looking for loot, which refers to this loot
-			$refrows = $DB->select('SELECT entry FROM ?_?# WHERE mincountOrRef=? LIMIT 200',$table, -$num);
+			$refrows = $DB->select('SELECT entry FROM '.$table.' WHERE mincountOrRef=? LIMIT 200',$table, -$num);
 			foreach ($refrows as $i => $refrow)
 			{
 				$num = $refrow['entry'];
