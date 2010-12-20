@@ -26,7 +26,13 @@
 	</div>
 
 	<div id="toplinks" class="toplinks">
-		{if isset($user)}<a href="?user={$user.name}">{$user.name}</a>|<a href="?account=signout{if $query}&amp;next={$query|escape}{/if}">{#Sign_out#}</a>{else}<a href="?account=signin{if $query}&amp;next={$query|escape}{/if}">{#Sign_in#}</a>{/if}|<a href="javascript:;" id="language-changer">{#Language#} <small>&#9660;</small></a>
+		{if isset($user)}
+                    <a href="?user={$user.name}">{$user.name}</a>|<a href="?account=signout{if $query}&amp;next={$query|escape}{/if}">{#Sign_out#}</a>
+                {else}
+                    <a href="?account=signin{if $query}&amp;next={$query|escape}{/if}">{#Sign_in#}</a>
+                    <a href="?account=signup{if $query}&amp;next={$query|escape}{/if}">{#Signup#}</a>
+                {/if}
+                |<a href="javascript:;" id="language-changer">{#Language#} <small>&#9660;</small></a>
 	</div>
 
 	<div id="wrapper">

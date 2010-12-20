@@ -92,9 +92,11 @@ switch($_REQUEST['account']):
 		break;
 	case 'signup_false':
 	case 'signup':
-		// Регистрация аккаунта
-		header( 'Location: http://your_realm_regpage' );
+		// You can change to your realm page
+		//header( 'Location: http://your_realm_regpage' );
+		$smarty->display('signup.tpl');
 		break;
+                break;
 	case 'signout':
 		// Выход из пользователя
 		UnSet($user);
