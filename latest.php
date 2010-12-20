@@ -17,7 +17,7 @@ switch($_GET['latest'])
 		$comments = array();
 		$rows = $DB->select('
 			SELECT `id`, `type`, `typeID`, LEFT(`commentbody`, 120) as `preview`, `userID` as `user`, `post_date` as `date`, (NOW()-`post_date`) as `elapsed`
-			FROM ?_comments
+			FROM ?_udwbase_comments
 			WHERE 1
 			ORDER BY post_date DESC
 			LIMIT 300');
@@ -58,7 +58,7 @@ switch($_GET['latest'])
 			$comments[$i]['user'] = $rDB->selectCell('SELECT username FROM ?_account WHERE id=?d LIMIT 1', $row['user']);
                         if(empty($comments[$i]['user']))
 				$comments[$i]['user'] = 'Anonymous';
-			$comments[$i]['rating'] = array_sum($DB->selectCol('SELECT rate FROM ?_comments_rates WHERE commentid=?d', $row['id']));
+			$comments[$i]['rating'] = array_sum($DB->selectCol('SELECT rate FROM ?_udwbase_comments_rates WHERE commentid=?d', $row['id']));
 			$comments[$i]['purged'] = ($comments[$i]['rating'] <= -50)? 1: 0;
 			$comments[$i]['deleted'] = 0;
 		}
