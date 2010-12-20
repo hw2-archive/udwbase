@@ -36,7 +36,7 @@ function point_delim(&$str, &$a, &$b)
 	return;
 }
 
-function CheckPwd($username, &$shapass,$isSession=false)
+function CheckPwd($username, $shapass)
 {
 	// Проверка пароля пользователя
 	// -1: пользователя не существует
@@ -46,21 +46,14 @@ function CheckPwd($username, &$shapass,$isSession=false)
 	global $rDB;
 	global $UDWBaseconf;
 	$user_row = $rDB->selectRow('SELECT id, sha_pass_hash, gmlevel FROM ?_account WHERE username=? LIMIT 1', $username);
-        if ($user_row)
+	if ($user_row)
 	{
-		/*[for realmd]if ($shapass==$user_row['sha_pass_hash'])
+		if ($shapass==$user_row['sha_pass_hash'])
 		{
 			$user = array();
 			$user['id'] = $user_row['id'];
 			$user['name'] = $username;
-			$user['roles'] = ($user_row['gmlevel']>0)? 2: 0;*/
-                if (($isSession && $shapass==$user_row['user_password']) || (!$isSession && check_hash($shapass,$user_row['user_password']) ))
-		{
-                        $shapass = $user_row['user_password'];
-			$user = array();
-			$user['id'] = $user_row['user_id'];
-			$user['name'] = $username;
-			$user['roles'] = ($user_row['user_level']>0)? 2: 0;
+			$user['roles'] = ($user_row['gmlevel']>0)? 2: 0;
 			/*
 				roles:
 					0 - Обычный пользователь (gmlevel=0)
@@ -90,7 +83,7 @@ function CheckPwd($username, &$shapass,$isSession=false)
 					24 - (белый, -15:15, 5, ред+уд)
 					25 - (белый, -15:15, 5, ред+уд)
 					26 - (синий, -25:25, 5, ред+уд)
-			
+
 			*/
 			$user['perms'] = 1;
 			return $user;
@@ -102,131 +95,6 @@ function CheckPwd($username, &$shapass,$isSession=false)
 		return -1;
 	}
 }
-
-/**
-* Check for correct password
-*
-* @param string $password The password in plain text
-* @param string $hash The stored password hash
-*
-* @return bool Returns true if the password is correct, false if not.
-*/
-function check_hash($password, $hash)
-{
-	$itoa64 = './0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-	if (strlen($hash) == 34)
-	{
-		return (_hash_crypt_private($password, $hash, $itoa64) === $hash) ? true : false;
-	}
-
-	return (md5($password) === $hash) ? true : false;
-}
-
-/**
-* The crypt function/replacement
-*/
-function _hash_crypt_private($password, $setting, &$itoa64)
-{
-	$output = '*';
-
-	// Check for correct hash
-	if (substr($setting, 0, 3) != '$H$')
-	{
-		return $output;
-	}
-
-	$count_log2 = strpos($itoa64, $setting[3]);
-
-	if ($count_log2 < 7 || $count_log2 > 30)
-	{
-		return $output;
-	}
-
-	$count = 1 << $count_log2;
-	$salt = substr($setting, 4, 8);
-
-	if (strlen($salt) != 8)
-	{
-		return $output;
-	}
-
-	/**
-	* We're kind of forced to use MD5 here since it's the only
-	* cryptographic primitive available in all versions of PHP
-	* currently in use.  To implement our own low-level crypto
-	* in PHP would result in much worse performance and
-	* consequently in lower iteration counts and hashes that are
-	* quicker to crack (by non-PHP code).
-	*/
-	if (PHP_VERSION >= 5)
-	{
-		$hash = md5($salt . $password, true);
-		do
-		{
-			$hash = md5($hash . $password, true);
-		}
-		while (--$count);
-	}
-	else
-	{
-		$hash = pack('H*', md5($salt . $password));
-		do
-		{
-			$hash = pack('H*', md5($hash . $password));
-		}
-		while (--$count);
-	}
-
-	$output = substr($setting, 0, 12);
-	$output .= _hash_encode64($hash, 16, $itoa64);
-
-	return $output;
-}
-
-/**
-* Encode hash
-*/
-function _hash_encode64($input, $count, &$itoa64)
-{
-	$output = '';
-	$i = 0;
-
-	do
-	{
-		$value = ord($input[$i++]);
-		$output .= $itoa64[$value & 0x3f];
-
-		if ($i < $count)
-		{
-			$value |= ord($input[$i]) << 8;
-		}
-
-		$output .= $itoa64[($value >> 6) & 0x3f];
-
-		if ($i++ >= $count)
-		{
-			break;
-		}
-
-		if ($i < $count)
-		{
-			$value |= ord($input[$i]) << 16;
-		}
-
-		$output .= $itoa64[($value >> 12) & 0x3f];
-
-		if ($i++ >= $count)
-		{
-			break;
-		}
-
-		$output .= $itoa64[($value >> 18) & 0x3f];
-	}
-	while ($i < $count);
-
-	return $output;
-}
-
 
 function create_usersend_pass($user, $pass)
 {
