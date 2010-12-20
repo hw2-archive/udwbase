@@ -14,7 +14,7 @@
 	if($rows)
 		$smarty->assign('news', $rows);
 
-        $rows2 = @$DB->select('SELECT site_version AS text FROM ?_db_version LIMIT 1');
+        $rows2 = @$DB->select('SELECT version AS text FROM ?_db_version LIMIT 1');
 	if($rows2)
 		$smarty->assign('version', $rows2);
 
