@@ -165,7 +165,7 @@ if(!$item = load_cache(5, $id))
 
 	// Search Vender that sell this thing
 	$rows_soldby = $DB->select('
-		SELECT ?#, c.entry, v.maxcount AS stock
+		SELECT ?#, c.entry, v.ExtendedCost, v.maxcount AS stock
 		{
 			, l.name_loc?d as `name_loc`
 			, l.subname_loc'.$_SESSION['locale'].' as `subname_loc`
@@ -191,7 +191,6 @@ if(!$item = load_cache(5, $id))
 			$item['soldby'][$numRow] = array();
 			$item['soldby'][$numRow] = creatureinfo2($row);
 			$item['soldby'][$numRow]['stock'] = ($row['stock']==0)? -1 : $row['stock'];
-			/* [NOTE] implement for honor cost
 			if ($row['ExtendedCost'])
 			{
 				$item['soldby'][$numRow]['cost'] = array();
@@ -207,9 +206,9 @@ if(!$item = load_cache(5, $id))
 						allitemsinfo($extcost['reqitem'.$j], 0);
 						$item['soldby'][$numRow]['cost']['items'][] = array('item' => $extcost['reqitem'.$j], 'count' => $extcost['reqitemcount'.$j]);
 					}
-			} else { */
+			} else {
 				$item['soldby'][$numRow]['cost']['money'] = $item['BuyPrice'];
-			//}
+			}
 		}
 		unset($extcost);
 		unset($numRow);
@@ -365,6 +364,38 @@ if(!$item = load_cache(5, $id))
 		unset ($drop);
 	}
 	unset ($drops_sk);
+
+	// Поиск вещей, из которых перерабатывается эта вещь
+	$drops_pr = drop('?_prospecting_loot_template',$item['entry']);
+	if ($drops_pr)
+	{
+		$item['prospectingloot'] = array();
+		foreach($drops_pr as $lootid => $drop)
+		{
+			$rows = $DB->select('
+				SELECT c.?#, c.entry, maxcount
+				{
+					, l.name_loc?d as `name_loc`
+				}
+				FROM ?_icons, item_template c
+				{ LEFT JOIN (locales_items l) ON l.entry=c.entry AND ? }
+				WHERE
+					entry=?d
+					AND id=displayid
+				',
+				$item_cols[2],
+				($_SESSION['locale']>0)? $_SESSION['locale']: DBSIMPLE_SKIP,
+				($_SESSION['locale']>0)? 1: DBSIMPLE_SKIP,
+				$lootid
+			);
+			foreach ($rows as $numRow=>$row)
+				$item['prospectingloot'][] = array_merge(iteminfo2($row, 0), $drop);
+		}
+		unset ($rows);
+		unset ($lootid);
+		unset ($drop);
+	}
+	unset ($drops_pr);
 
 	// Дизенчантитcя в:
 	if (!($item['disenchanting'] = loot('?_disenchant_loot_template', $item['DisenchantID'])))

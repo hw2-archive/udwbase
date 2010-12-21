@@ -41,6 +41,10 @@ define("GAMEOBJECT_TYPE_MINI_GAME", 27);
 define("GAMEOBJECT_TYPE_LOTTERY_KIOSK", 28);
 define("GAMEOBJECT_TYPE_CAPTURE_POINT", 29);
 define("GAMEOBJECT_TYPE_AURA_GENERATOR", 30);
+define("GAMEOBJECT_TYPE_DUNGEON_DIFFICULTY", 31);
+define("GAMEOBJECT_TYPE_UNK", 32);
+define("GAMEOBJECT_TYPE_DESTRUCTIBLE_BUILDING", 33);
+define("GAMEOBJECT_TYPE_GUILD_BANK", 34);
 
 // Column LockProperties in Lock.dbc
 define("LOCK_PROPERTIES_FOOTLOCK",1);
@@ -356,6 +360,21 @@ function objectinfo2(&$Row, $level=0)
 						* data2: auraID1 (Spell Id from spell.dbc)
 						* data3: conditionID1 (Unknown ID)
 				*/
+				break;
+			case GAMEOBJECT_TYPE_DUNGEON_DIFFICULTY:
+				/*
+						* data0: mapID (From Maps.dbc)
+						* data1: difficulty (0 or 1)
+				*/
+				break;
+			case GAMEOBJECT_TYPE_UNK:
+				/*	Object type not used */
+				break;
+			case GAMEOBJECT_TYPE_DESTRUCTIBLE_BUILDING:
+				/*	Object type not used */
+				break;
+			case GAMEOBJECT_TYPE_GUILD_BANK:
+				/*	No data data used, all are always 0 */
 				break;
 		endswitch;
 		// Тип объекта и требуемый уровень скилла, и какого скилла

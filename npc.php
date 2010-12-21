@@ -64,8 +64,8 @@ if(!$npc = load_cache(1, intval($id)))
 			$npc['minlevel'] = '??';
 			$npc['maxlevel'] = '??';
 		}
-		$npc['mindmg'] = ($row['mindmg'] /*+ $row['attackpower']*/) * $row['dmg_multiplier'];
-		$npc['maxdmg'] = ($row['maxdmg'] /*+ $row['attackpower']*/) * $row['dmg_multiplier'];
+		$npc['mindmg'] = ($row['mindmg'] + $row['attackpower']) * $row['dmg_multiplier'];
+		$npc['maxdmg'] = ($row['maxdmg'] + $row['attackpower']) * $row['dmg_multiplier'];
 		
 		$toDiv = array('minhealth', 'maxmana', 'minmana', 'maxhealth', 'armor', 'mindmg', 'maxdmg');
 		// Разделяем на тысячи (ххххххххх => ххх,ххх,ххх)
@@ -143,14 +143,15 @@ if(!$npc = load_cache(1, intval($id)))
 
 	// Обучает:
 	// Если это пет со способностью:
-	$row = $DB->selectRow('
+	/* [NOTE] should be implemented with CreatureSpellData.dbc
+           $row = $DB->selectRow('
 		SELECT Spell1, Spell2, Spell3, Spell4
 		FROM ?_petcreateinfo_spell
 		WHERE
 			entry=?d
 		',
 		$npc['entry']
-	);
+	);*/
 	if ($row)
 	{
 		$npc['teaches'] = array();
@@ -229,7 +230,7 @@ if(!$npc = load_cache(1, intval($id)))
 			$npc['sells'][$numRow] = iteminfo2($row);
 			$npc['sells'][$numRow]['maxcount'] = $row['drop-maxcount'];
 			$npc['sells'][$numRow]['cost'] = array();
-			/* if ($row['ExtendedCost']) [NOTE] overwrite with honor points? 
+			if ($row['ExtendedCost'])
 			{
 				$extcost = $DB->selectRow('SELECT * FROM ?_udwbase_item_extended_cost WHERE extendedcostID=?d LIMIT 1', $row['ExtendedCost']);
 				if ($extcost['reqhonorpoints']>0)
@@ -243,7 +244,7 @@ if(!$npc = load_cache(1, intval($id)))
 						allitemsinfo($extcost['reqitem'.$j], 0);
 						$npc['sells'][$numRow]['cost']['items'][] = array('item' => $extcost['reqitem'.$j], 'count' => $extcost['reqitemcount'.$j]);
 					}
-			} */
+			}
 			if ($row['BuyPrice']>0)
 				$npc['sells'][$numRow]['cost']['money'] = $row['BuyPrice'];
 		}

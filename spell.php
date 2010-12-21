@@ -373,7 +373,8 @@ if(!$spell = load_cache(13, intval($id)))
 		if ($taughtbyspells)
 		{
 			// Список петов, кастующих спелл, обучающий нужному спеллу
-			$taughtbypets = $DB->select('
+			// [NOTE] should be implemented with CreatureSpellData.dbc
+                        /*$taughtbypets = $DB->select('
 				SELECT ?#, c.entry
 				{ , name_loc?d AS name_loc, subname_loc'.$_SESSION['locale'].' AS subname_loc }
 				FROM ?_udwbase_factiontemplate, ?_creature_template c
@@ -393,7 +394,7 @@ if(!$spell = load_cache(13, intval($id)))
 				foreach($taughtbypets as $i=>$petrow)
 					$spell['taughtbynpc'][] = creatureinfo2($petrow);
 				unset ($taughtbypets);
-			}
+			} */
 
 			// Список квестов, наградой за которые является спелл, обучающий нужному спеллу
 			$taughtbyquest = $DB->select('

@@ -25,6 +25,7 @@ switch($_SESSION['locale'])
 		d('LOCALE_HUNTER',		'Охотник');
 		d('LOCALE_ROGUE',		'Разбойник');
 		d('LOCALE_PRIEST',		'Жрец');
+		d('LOCALE_DEATH_KNIGHT','Рыцарь Смерти');
 		d('LOCALE_SHAMAN',		'Шаман');
 		d('LOCALE_MAGE',		'Маг');
 		d('LOCALE_WARLOCK',		'Чернокнижник');
@@ -38,6 +39,8 @@ switch($_SESSION['locale'])
 		d('LOCALE_TAUREN',		'Таурен');
 		d('LOCALE_GNOME',		'Гном');
 		d('LOCALE_TROLL',		'Троль');
+		d('LOCALE_BLOOD_ELF',	'Эльф Крови');
+		d('LOCALE_DRAENEI',		'Дреней');
 		// side
 		d('LOCALE_BOTH',		'Обе');
 		d('LOCALE_HORDE',		'Орда');
@@ -70,6 +73,7 @@ switch($_SESSION['locale'])
 		d('LOCALE_BAG_HERB',	'Сумка травника');
 		d('LOCALE_BAG_ENCHANT',	'Сумка зачаровывателя');
 		d('LOCALE_BAG_ENGINEER','Сумка инженера');
+		d('LOCALE_BAG_GEM',		'Сумка ювелира');
 		d('LOCALE_BAG_MINING',	'Шахтерская сумка');
 		// equip slots
 		d('LOCALE_EQUIP_HEAD',			'Голова');
@@ -176,6 +180,11 @@ switch($_SESSION['locale'])
 		d('LOCALE_GBONUS_CHANCEONHIT',			'Вероятность попадания при ударе: ');
 		d('LOCALE_GBONUS_EQUIP',				'Если на персонаже: ');
 		d('LOCALE_GBONUS_USE',					'Использование: ');
+		// sockets
+		d('LOCALE_SOCKET_META',		'Мета-оправа');
+		d('LOCALE_SOCKET_RED',		'Красная оправа');
+		d('LOCALE_SOCKET_YELLOW',	'Желтая оправа');
+		d('LOCALE_SOCKET_BLUE',		'Синяя оправа');
 
 		// misc
 		d('LOCALE_SPEED',				'Скорость');
@@ -203,6 +212,7 @@ switch($_SESSION['locale'])
 		d('LOCALE_HUNTER',		'Hunter');
 		d('LOCALE_ROGUE',		'Rogue');
 		d('LOCALE_PRIEST',		'Priest');
+		d('LOCALE_DEATH_KNIGHT','Death Knight');
 		d('LOCALE_SHAMAN',		'Shaman');
 		d('LOCALE_MAGE',		'Mage');
 		d('LOCALE_WARLOCK',		'Warlock');
@@ -216,6 +226,8 @@ switch($_SESSION['locale'])
 		d('LOCALE_TAUREN',		'Tauren');
 		d('LOCALE_GNOME',		'Gnome');
 		d('LOCALE_TROLL',		'Troll');
+		d('LOCALE_BLOOD_ELF',	'Blood Elf');
+		d('LOCALE_DRAENEI',		'Draenei');
 		// side
 		d('LOCALE_BOTH',		'Both');
 		d('LOCALE_HORDE',		'Horde');
@@ -248,6 +260,7 @@ switch($_SESSION['locale'])
 		d('LOCALE_BAG_HERB',	'Herb Bag');
 		d('LOCALE_BAG_ENCHANT',	'Enchanting bag');
 		d('LOCALE_BAG_ENGINEER','Engineering Bag');
+		d('LOCALE_BAG_GEM',		'Gem Bag');
 		d('LOCALE_BAG_MINING',	'Mining Bag');
 		// equip slots
 		d('LOCALE_EQUIP_HEAD',			'Head');
@@ -354,6 +367,11 @@ switch($_SESSION['locale'])
 		d('LOCALE_GBONUS_CHANCEONHIT',			'Chance on hit: ');
 		d('LOCALE_GBONUS_EQUIP',				'Equip: ');
 		d('LOCALE_GBONUS_USE',					'Use: ');
+		// sockets
+		d('LOCALE_SOCKET_META',		'Meta Socket');
+		d('LOCALE_SOCKET_RED',		'Red Socket');
+		d('LOCALE_SOCKET_YELLOW',	'Yellow Socket');
+		d('LOCALE_SOCKET_BLUE',		'Blue Socket');
 		
 		// misc
 		d('LOCALE_SPEED',				'Speed');

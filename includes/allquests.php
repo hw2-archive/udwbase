@@ -36,10 +36,12 @@ define('QUEST_FLAGS_SHARABLE',			8);
 define('QUEST_FLAGS_NONE2',				16);
 define('QUEST_FLAGS_EPIC',				32);
 define('QUEST_FLAGS_RAID',				64);
-
+define('QUEST_FLAGS_TBC',				128);
 define('QUEST_FLAGS_UNK2',				256);
 define('QUEST_FLAGS_HIDDEN_REWARDS',	512);
 define('QUEST_FLAGS_UNK4',				1024);
+define('QUEST_FLAGS_TBC_RACES',			2048);
+define('QUEST_FLAGS_DAILY',				4096);
 
 define('QUEST_SPECIALFLAGS_NONE',		0);
 define('QUEST_SPECIALFLAGS_REPEATABLE',	1);
@@ -382,8 +384,8 @@ function GetQuestInfo(&$data, $dataflag = QUEST_DATAFLAG_MINIMUM)
 		// Флаги
 		$data['QuestFlags'] = $data['QuestFlags'];
 		// not used
-		//if($data['QuestFlags'] & QUEST_FLAGS_DAILY)
-		//		$data['Daily'] = true;
+		if($data['QuestFlags'] & QUEST_FLAGS_DAILY)
+			$data['Daily'] = true;
 		// Тип квеста
 		$data['type'] = $data['Type'];
 		if($data['type'] == 1)

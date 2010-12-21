@@ -30,7 +30,7 @@ $classes = array(
 	3 => LOCALE_HUNTER,
 	4 => LOCALE_ROGUE,
 	5 => LOCALE_PRIEST,
-	//6 => death knight?,
+	6 => LOCALE_DEATH_KNIGHT,
 	7 => LOCALE_SHAMAN,
 	8 => LOCALE_MAGE,
 	9 => LOCALE_WARLOCK,
@@ -45,6 +45,8 @@ define ("RACE_UNDEAD", 16);
 define ("RACE_TAUREN", 32);
 define ("RACE_GNOME", 64);
 define ("RACE_TROLL", 128);
+define ("RACE_BLOODELF", 512);
+define ("RACE_DRAENEI", 1024);
 
 // Типы разделов
 global $types;
@@ -136,11 +138,11 @@ function classes($class)
 function races($race)
 {
 	// Простые варианты:
-	if($race == RACE_HUMAN|RACE_ORC|RACE_DWARF|RACE_NIGHTELF|RACE_UNDEAD|RACE_TAUREN|RACE_GNOME|RACE_TROLL || $race == 0)
+	if($race == RACE_HUMAN|RACE_ORC|RACE_DWARF|RACE_NIGHTELF|RACE_UNDEAD|RACE_TAUREN|RACE_GNOME|RACE_TROLL|RACE_BLOODELF|RACE_DRAENEI || $race == 0)
 		return array('side' => 3, 'name' => LOCALE_BOTH);
-	elseif($race == RACE_ORC|RACE_UNDEAD|RACE_TAUREN|RACE_TROLL)
+	elseif($race == RACE_ORC|RACE_UNDEAD|RACE_TAUREN|RACE_TROLL|RACE_BLOODELF)
 		return array('side' => 2, 'name' => LOCALE_HORDE);
-	elseif($race == RACE_HUMAN|RACE_DWARF|RACE_NIGHTELF|RACE_GNOME)
+	elseif($race == RACE_HUMAN|RACE_DWARF|RACE_NIGHTELF|RACE_GNOME|RACE_DRAENEI)
 		return array('side' => 1, 'name' => LOCALE_ALLIANCE);
 	else
 	{
@@ -184,6 +186,16 @@ function races($race)
 		{
 			(($races['side']==1) or ($races['side']==3))? $races['side']=3 : $races['side']=2;
 			if ($races['name']) $races['name'] .= ', '; $races['name'] .= LOCALE_TROLL;
+		}
+		if ($race & RACE_BLOODELF)
+		{
+			(($races['side']==1) or ($races['side']==3))? $races['side']=3 : $races['side']=2;
+			if ($races['name']) $races['name'] .= ', '; $races['name'] .= LOCALE_BLOOD_ELF;
+		}
+		if ($race & RACE_DRAENEI)
+		{
+			(($races['side']==2) or ($races['side']==3))? $races['side']=3 : $races['side']=1;
+			if ($races['name']) $races['name'] .= ', '; $races['name'] .= LOCALE_DRAENEI;
 		}
 		return $races;
 	}

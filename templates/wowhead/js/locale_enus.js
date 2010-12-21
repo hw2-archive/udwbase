@@ -1,14 +1,14 @@
-var mn_items = [[2, "Weapons", , [[0, "One-Handed Axes"], [1, "Two-Handed Axes"], [2, "Bows"], [3, "Guns"], [4, "One-Handed Maces"], [5, "Two-Handed Maces"], [6, "Polearms"], [7, "One-Handed Swords"], [8, "Two-Handed Swords"], [10, "Staves"], [13, "Fist Weapons"], [14, "Miscellaneous"], [15, "Daggers"], [16, "Thrown"], [18, "Crossbows"], [19, "Wands"], [20, "Fishing Poles"]],, "INV_Sword_27"], [4, "Armor", , [[1, "Cloth"/*, , [[5, "Chest", "?items=4.1&filter=sl=5"], [8, "Feet", "?items=4.1&filter=sl=8"], [10, "Hands", "?items=4.1&filter=sl=10"], [1, "Head", "?items=4.1&filter=sl=1"], [7, "Legs", "?items=4.1&filter=sl=7"], [3, "Shoulder", "?items=4.1&filter=sl=3"], [6, "Waist", "?items=4.1&filter=sl=6"], [9, "Wrist", "?items=4.1&filter=sl=9"]]*/], [2, "Leather"/*, , [[5, "Chest", "?items=4.2&filter=sl=5"], [8, "Feet", "?items=4.2&filter=sl=8"], [10, "Hands", "?items=4.2&filter=sl=10"], [1, "Head", "?items=4.2&filter=sl=1"], [7, "Legs", "?items=4.2&filter=sl=7"], [3, "Shoulder", "?items=4.2&filter=sl=3"], [6, "Waist", "?items=4.2&filter=sl=6"], [9, "Wrist", "?items=4.2&filter=sl=9"]]*/], [3, "Mail"/*, , [[5, "Chest", "?items=4.3&filter=sl=5"], [8, "Feet", "?items=4.3&filter=sl=8"], [10, "Hands", "?items=4.3&filter=sl=10"], [1, "Head", "?items=4.3&filter=sl=1"], [7, "Legs", "?items=4.3&filter=sl=7"], [3, "Shoulder", "?items=4.3&filter=sl=3"], [6, "Waist", "?items=4.3&filter=sl=6"], [9, "Wrist", "?items=4.3&filter=sl=9"]]*/], [4, "Plate"/*, , [[5, "Chest", "?items=4.4&filter=sl=5"], [8, "Feet", "?items=4.4&filter=sl=8"], [10, "Hands", "?items=4.4&filter=sl=10"], [1, "Head", "?items=4.4&filter=sl=1"], [7, "Legs", "?items=4.4&filter=sl=7"], [3, "Shoulder", "?items=4.4&filter=sl=3"], [6, "Waist", "?items=4.4&filter=sl=6"], [9, "Wrist", "?items=4.4&filter=sl=9"]]*/], /*[ - 3, "Amulets"], [ - 6, "Cloaks"], [ - 2, "Rings"], [ - 4, "Trinkets"], [ - 5, "Off-hand Frills"],*/ [6, "Shields"], [7, "Librams"], [8, "Idols"], [9, "Totems"], [0, "Miscellaneous"]],, "INV_Chest_Plate16"], [1, "Containers", , [[0, "Bags"], [1, "Soul Bags"], [2, "Herb Bags"], [3, "Enchanting Bags"], [4, "Engineering Bags"], [7, "Leatherworking Bags"]],, "INV_Misc_Bag_13"], [0, "Consumables", , [[0, "Consumables"], [1, "Potions"], [2, "Elixirs", , /*[[1, "Battle"], [2, "Guardian"]]*/], [3, "Flasks"], [4, "Scrolls"], [5, "Food & Drinks"], [6, "Permanent Item Enhancements"], /*[ - 3, "Temporary Item Enhancements"],*/ [7, "Bandages"], [8, "Other"]],,"INV_Potion_07"], [7, "Trade Goods", , [[1, "Parts"], [2, "Explosives"], [3, "Devices"], [5, "Cloth"], [6, "Leather"], [7, "Metal & Stone"], [8, "Meat"], [9, "Herbs"], [10, "Elemental"], [12, "Enchanting"], [13, "Material"], [11, "Other"]],, "INV_Gizmo_BronzeFramework_01"], [6, "Projectiles", , [[2, "Arrows"], [3, "Bullets"]],, "INV_Ammo_Bullet_02"], [11, "Quivers", , [[2, "Quivers"], [3, "Ammo Pouches"]],, "INV_Misc_Quiver_08"], [9, "Recipes", , [[0, "Books"], [6, "Alchemy"], [4, "Blacksmithing"], [5, "Cooking"], [8, "Enchanting"], [3, "Engineering"], [7, "First Aid"], [9, "Fishing"], [1, "Leatherworking"], [2, "Tailoring"]],, "INV_Scroll_04"], [15, "Miscellaneous", , [[0, "Junk"], [1, "Reagents"], [3, "Holiday"], /*[ - 4, "Mounts"], [ - 7, "Flying Mounts"], [ - 6, "Combat Pets"],*/ [2, "Small Pets"], /*[ - 2, "Armor Tokens"],*/ [4, "Other"]],, "INV_Qiraj_JewelBlessed"], [12, "Quest",,,, "INV_Misc_Bone_OrcSkull_01"], [13, "Keys",,,, "INV_Misc_Key_04"]];
+var mn_items = [[2, "Weapons", , [[0, "One-Handed Axes"], [1, "Two-Handed Axes"], [2, "Bows"], [3, "Guns"], [4, "One-Handed Maces"], [5, "Two-Handed Maces"], [6, "Polearms"], [7, "One-Handed Swords"], [8, "Two-Handed Swords"], [10, "Staves"], [13, "Fist Weapons"], [14, "Miscellaneous"], [15, "Daggers"], [16, "Thrown"], [18, "Crossbows"], [19, "Wands"], [20, "Fishing Poles"]],, "INV_Sword_27"], [4, "Armor", , [[1, "Cloth"/*, , [[5, "Chest", "?items=4.1&filter=sl=5"], [8, "Feet", "?items=4.1&filter=sl=8"], [10, "Hands", "?items=4.1&filter=sl=10"], [1, "Head", "?items=4.1&filter=sl=1"], [7, "Legs", "?items=4.1&filter=sl=7"], [3, "Shoulder", "?items=4.1&filter=sl=3"], [6, "Waist", "?items=4.1&filter=sl=6"], [9, "Wrist", "?items=4.1&filter=sl=9"]]*/], [2, "Leather"/*, , [[5, "Chest", "?items=4.2&filter=sl=5"], [8, "Feet", "?items=4.2&filter=sl=8"], [10, "Hands", "?items=4.2&filter=sl=10"], [1, "Head", "?items=4.2&filter=sl=1"], [7, "Legs", "?items=4.2&filter=sl=7"], [3, "Shoulder", "?items=4.2&filter=sl=3"], [6, "Waist", "?items=4.2&filter=sl=6"], [9, "Wrist", "?items=4.2&filter=sl=9"]]*/], [3, "Mail"/*, , [[5, "Chest", "?items=4.3&filter=sl=5"], [8, "Feet", "?items=4.3&filter=sl=8"], [10, "Hands", "?items=4.3&filter=sl=10"], [1, "Head", "?items=4.3&filter=sl=1"], [7, "Legs", "?items=4.3&filter=sl=7"], [3, "Shoulder", "?items=4.3&filter=sl=3"], [6, "Waist", "?items=4.3&filter=sl=6"], [9, "Wrist", "?items=4.3&filter=sl=9"]]*/], [4, "Plate"/*, , [[5, "Chest", "?items=4.4&filter=sl=5"], [8, "Feet", "?items=4.4&filter=sl=8"], [10, "Hands", "?items=4.4&filter=sl=10"], [1, "Head", "?items=4.4&filter=sl=1"], [7, "Legs", "?items=4.4&filter=sl=7"], [3, "Shoulder", "?items=4.4&filter=sl=3"], [6, "Waist", "?items=4.4&filter=sl=6"], [9, "Wrist", "?items=4.4&filter=sl=9"]]*/], /*[ - 3, "Amulets"], [ - 6, "Cloaks"], [ - 2, "Rings"], [ - 4, "Trinkets"], [ - 5, "Off-hand Frills"],*/ [6, "Shields"], [7, "Librams"], [8, "Idols"], [9, "Totems"], [0, "Miscellaneous"]],, "INV_Chest_Plate16"], [1, "Containers", , [[0, "Bags"], [1, "Soul Bags"], [2, "Herb Bags"], [3, "Enchanting Bags"], [4, "Engineering Bags"], [5, "Gem Bags"], [6, "Mining Bags"], [7, "Leatherworking Bags"]],, "INV_Misc_Bag_13"], [0, "Consumables", , [[0, "Consumables"], [1, "Potions"], [2, "Elixirs", , /*[[1, "Battle"], [2, "Guardian"]]*/], [3, "Flasks"], [4, "Scrolls"], [5, "Food & Drinks"], [6, "Permanent Item Enhancements"], /*[ - 3, "Temporary Item Enhancements"],*/ [7, "Bandages"], [8, "Other"]],,"INV_Potion_07"], [7, "Trade Goods", , [[1, "Parts"], [2, "Explosives"], [3, "Devices"], [4, "Jewelcrafting"], [5, "Cloth"], [6, "Leather"], [7, "Metal & Stone"], [8, "Meat"], [9, "Herbs"], [10, "Elemental"], [12, "Enchanting"], [13, "Material"], [11, "Other"]],, "INV_Gizmo_BronzeFramework_01"], [6, "Projectiles", , [[2, "Arrows"], [3, "Bullets"]],, "INV_Ammo_Bullet_02"], [11, "Quivers", , [[2, "Quivers"], [3, "Ammo Pouches"]],, "INV_Misc_Quiver_08"], [9, "Recipes", , [[0, "Books"], [6, "Alchemy"], [4, "Blacksmithing"], [5, "Cooking"], [8, "Enchanting"], [3, "Engineering"], [7, "First Aid"], [9, "Fishing"], [10, "Jewelcrafting"], [1, "Leatherworking"], [2, "Tailoring"]],, "INV_Scroll_04"], [3, "Gems", , [[0, "Red "], [1, "Blue"], [2, "Yellow"], [3, "Purple"], [4, "Green"], [5, "Orange"], [6, "Meta"], [7, "Simple"], [8, "Prismatic"]],, "INV_Jewelcrafting_ShadowsongAmethyst_01"], [15, "Miscellaneous", , [[0, "Junk"], [1, "Reagents"], [3, "Holiday"], /*[ - 4, "Mounts"], [ - 7, "Flying Mounts"], [ - 6, "Combat Pets"],*/ [2, "Small Pets"], /*[ - 2, "Armor Tokens"],*/ [4, "Other"]],, "INV_Qiraj_JewelBlessed"], [12, "Quest",,,, "INV_Misc_Bone_OrcSkull_01"], [13, "Keys",,,, "INV_Misc_Key_04"]];
 var mn_itemSets = [[11, "Druid"], [3, "Hunter"], [8, "Mage"], [2, "Paladin"], [5, "Priest"], [4, "Rogue"], [7, "Shaman"], [9, "Warlock"], [1, "Warrior"]];
 var mn_npcs = [[1, "Beasts"], [8, "Critters"], [3, "Demons"], [2, "Dragonkin"], [4, "Elementals"], [5, "Giants"], [7, "Humanoids"], [9, "Mechanicals"], [12, "Small Pets"], [6, "Undead"], [10, "Uncategorized"]];
 var mn_objects = [[9, "Books"], [3, "Containers"], [ - 5, "Footlockers"], [ - 3, "Herbs"], [ - 4, "Mineral Veins"], [ - 2, "Quest"]];
-var mn_quests = [[0,"Eastern Kingdoms",,[[36,"Alterac Mountains"],[45,"Arathi Highlands"],[3,"Badlands"],[25,"Blackrock Mountain"],[4,"Blasted Lands"],[46,"Burning Steppes"],[41,"Deadwind Pass"],[2257,"Deeprun Tram"],[1,"Dun Morogh"],[10,"Duskwood"],[139,"Eastern Plaguelands"],[12,"Elwynn Forest"],[267,"Hillsbrad Foothills"],[1537,"Ironforge"],[38,"Loch Modan"],[44,"Redridge Mountains"],[51,"Searing Gorge"],[130,"Silverpine Forest"],[1519,"Stormwind City"],[33,"Stranglethorn Vale"],[8,"Swamp of Sorrows"],[47,"The Hinterlands"],[85,"Tirisfal Glades"],[1497,"Undercity"],[28,"Western Plaguelands"],[40,"Westfall"],[11,"Wetlands"]]],[1,"Kalimdor",,[[331,"Ashenvale"],[16,"Azshara"],[148,"Darkshore"],[1657,"Darnassus"],[405,"Desolace"],[14,"Durotar"],[15,"Dustwallow Marsh"],[361,"Felwood"],[357,"Feralas"],[493,"Moonglade"],[215,"Mulgore"],[1637,"Orgrimmar"],[1377,"Silithus"],[406,"Stonetalon Mountains"],[440,"Tanaris"],[141,"Teldrassil"],[17,"The Barrens"],[400,"Thousand Needles"],[1638,"Thunder Bluff"],[1216,"Timbermaw Hold"],[490,"Un'Goro Crater"],[618,"Winterspring"]]],[2,"Dungeons",,[[719,"Blackfathom Deeps"],[1584,"Blackrock Depths"],[1583,"Blackrock Spire"],[2557,"Dire Maul"],[133,"Gnomeregan"],[2100,"Maraudon"],[2437,"Ragefire Chasm"],[722,"Razorfen Downs"],[491,"Razorfen Kraul"],[796,"Scarlet Monastery"],[2057,"Scholomance"],[209,"Shadowfang Keep"],[2017,"Stratholme"],[1581,"The Deadmines"],[717,"The Stockade"],[1337,"Uldaman"],[718,"Wailing Caverns"],[978,"Zul'Farrak"]]],[3,"Raids",,[[2677,"Blackwing Lair"],[2717,"Molten Core"],[3456,"Naxxramas"],[2159,"Onyxia's Lair"],[3429,"Ruins of Ahn'Qiraj"],[3428,"Temple of Ahn'Qiraj"],[19,"Zul'Gurub"]]],[4,"Classes",,[[-263,"Druid"],[-261,"Hunter"],[-161,"Mage"],[-141,"Paladin"],[-262,"Priest"],[-162,"Rogue"],[-82,"Shaman"],[-61,"Warlock"],[-81,"Warrior"]]],[5,"Professions",,[[-181,"Alchemy"],[-121,"Blacksmithing"],[-304,"Cooking"],[-201,"Engineering"],[-324,"First Aid"],[-101,"Fishing"],[-24,"Herbalism"],[-182,"Leatherworking"],[-264,"Tailoring"]]],[6,"Battlegrounds",,[[-25,"All"],[3358,"Arathi Basin"],[2597,"Alterac Valley"],[3277,"Warsong Gulch"]]],[9,"Seasonal",,[[-364,"Darkmoon Faire"],[-1003,"Hallow's End"],[-366,"Lunar Festival"],[-369,"Midsummer Fire Festival"]]],[7,"Miscellaneous",,[[-365,"Ahn'Qiraj War Effort"],[-241,"Argent Tournament"],[-1,"Epic"],[-344,"Legendary"],[-367,"Reputation"]]],[-2,"Uncategorized"]];
-var mn_spells = [[7,"Class Skills",,[[11,"Druid",,[[574,"Balance"],[134,"Feral Combat"],[573,"Restoration"]]],[3,"Hunter",,[[50,"Beast Mastery"],[163,"Marksmanship"],[51,"Survival"]]],[8,"Mage",,[[237,"Arcane"],[8,"Fire"],[6,"Frost"]]],[2,"Paladin",,[[594,"Holy"],[267,"Protection"],[184,"Retribution"]]],[5,"Priest",,[[613,"Discipline"],[56,"Holy"],[78,"Shadow Magic"]]],[4,"Rogue",,[[253,"Assassination"],[38,"Combat"],[633,"Lockpicking"],[39,"Subtlety"]]],[7,"Shaman",,[[375,"Elemental Combat"],[373,"Enhancement"],[374,"Restoration"]]],[9,"Warlock",,[[355,"Affliction"],[354,"Demonology"],[593,"Destruction"]]],[1,"Warrior",,[[26,"Arms"],[256,"Fury"],[257,"Protection"]]]]],[-3,"Pet Skills",,[[782,"Ghoul"],[,"Hunter"],[270,"Generic"],[653,"Bat"],[210,"Bear"],[655,"Bird of Prey"],[211,"Boar"],[213,"Carrion Bird"],[209,"Cat"],[780,"Chimera"],[787,"Core Hound"],[214,"Crab"],[212,"Crocolisk"],[781,"Devilsaur"],[763,"Dragonhawk"],[215,"Gorilla"],[654,"Hyena"],[775,"Moth"],[217,"Raptor"],[767,"Ravager"],[786,"Rhino"],[236,"Scorpid"],[768,"Serpent"],[783,"Silithid"],[203,"Spider"],[788,"Spirit Beast"],[765,"Sporebat"],[218,"Tallstrider"],[251,"Turtle"],[766,"Warp Stalker"],[785,"Wasp"],[656,"Wind Serpent"],[208,"Wolf"],[784,"Worm"],[,"Warlock"],[761,"Felguard"],[189,"Felhunter"],[188,"Imp"],[205,"Succubus"],[204,"Voidwalker"]]],[11,"Professions",,[[171,"Alchemy"],[164,"Blacksmithing",,[[9788,"Armorsmithing"],[9787,"Weaponsmithing"],[17041,"Master Axesmithing"],[17040,"Master Hammersmithing"],[17039,"Master Swordsmithing"]]],[333,"Enchanting"],[202,"Engineering",,[[20219,"Gnomish Engineering"],[20222,"Goblin Engineering"]]],[182,"Herbalism"],[165,"Leatherworking",,[[10656,"Dragonscale Leatherworking"],[10658,"Elemental Leatherworking"],[10660,"Tribal Leatherworking"]]],[186,"Mining"],[393,"Skinning"],[197,"Tailoring",,[[26798,"Mooncloth Tailoring"],[26801,"Shadoweave Tailoring"],[26797,"Spellfire Tailoring"]]]]],[9,"Secondary Skills",,[[185,"Cooking"],[129,"First Aid"],[356,"Fishing"],[762,"Riding"]]],[8,"Armor Proficiencies"],[10,"Languages"],[-4,"Racial Traits"],[6,"Weapon Skills"],[0,"Uncategorized"]];
-var mn_zones = [[0, "Eastern Kingdoms"], [1, "Kalimdor"], [2, "Dungeons"], [3, "Raids"], [6, "Battlegrounds"]];
+var mn_quests = [[0,"Eastern Kingdoms",,[[36,"Alterac Mountains"],[45,"Arathi Highlands"],[3,"Badlands"],[25,"Blackrock Mountain"],[4,"Blasted Lands"],[46,"Burning Steppes"],[279,"Dalaran"],[41,"Deadwind Pass"],[2257,"Deeprun Tram"],[1,"Dun Morogh"],[10,"Duskwood"],[139,"Eastern Plaguelands"],[12,"Elwynn Forest"],[3430,"Eversong Woods"],[3433,"Ghostlands"],[267,"Hillsbrad Foothills"],[1537,"Ironforge"],[4080,"Isle of Quel'Danas"],[38,"Loch Modan"],[44,"Redridge Mountains"],[51,"Searing Gorge"],[3487,"Silvermoon City"],[130,"Silverpine Forest"],[1519,"Stormwind City"],[33,"Stranglethorn Vale"],[8,"Swamp of Sorrows"],[47,"The Hinterlands"],[85,"Tirisfal Glades"],[1497,"Undercity"],[28,"Western Plaguelands"],[40,"Westfall"],[11,"Wetlands"]]],[1,"Kalimdor",,[[331,"Ashenvale"],[16,"Azshara"],[3524,"Azuremyst Isle"],[3525,"Bloodmyst Isle"],[148,"Darkshore"],[1657,"Darnassus"],[405,"Desolace"],[14,"Durotar"],[15,"Dustwallow Marsh"],[361,"Felwood"],[357,"Feralas"],[493,"Moonglade"],[215,"Mulgore"],[1637,"Orgrimmar"],[1377,"Silithus"],[406,"Stonetalon Mountains"],[440,"Tanaris"],[141,"Teldrassil"],[17,"The Barrens"],[3557,"The Exodar"],[400,"Thousand Needles"],[1638,"Thunder Bluff"],[1216,"Timbermaw Hold"],[490,"Un'Goro Crater"],[618,"Winterspring"]]],[8,"Outland",,[[3522,"Blade's Edge Mountains"],[3483,"Hellfire Peninsula"],[3518,"Nagrand"],[3523,"Netherstorm"],[3520,"Shadowmoon Valley"],[3703,"Shattrath City"],[3679,"Skettis"],[3519,"Terokkar Forest"],[3521,"Zangarmarsh"]]],[10,"Northrend",,[[3537,"Borean Tundra"],[4024,"Coldarra"],[4395,"Dalaran"],[65,"Dragonblight"],[394,"Grizzly Hills"],[495,"Howling Fjord"],[210,"Icecrown"],[3711,"Sholazar Basin"],[67,"The Storm Peaks"],[4197,"Wintergrasp"],[66,"Zul'Drak"]]],[2,"Dungeons",,[[4494,"Ahn'kahet: The Old Kingdom"],[3790,"Auchenai Crypts"],[3477,"Azjol-Nerub"],[719,"Blackfathom Deeps"],[1584,"Blackrock Depths"],[1583,"Blackrock Spire"],[1941,"Caverns of Time"],[3905,"Coilfang Reservoir"],[2557,"Dire Maul"],[4196,"Drak'Tharon Keep"],[133,"Gnomeregan"],[4375,"Gundrak"],[4272,"Halls of Lightning"],[4264,"Halls of Stone"],[3562,"Hellfire Ramparts"],[4095,"Magisters' Terrace"],[3792,"Mana-Tombs"],[2100,"Maraudon"],[2367,"Old Hillsbrad Foothills"],[2437,"Ragefire Chasm"],[722,"Razorfen Downs"],[491,"Razorfen Kraul"],[796,"Scarlet Monastery"],[2057,"Scholomance"],[3791,"Sethekk Halls"],[3789,"Shadow Labyrinth"],[209,"Shadowfang Keep"],[2017,"Stratholme"],[4100,"The Culling of Stratholme"],[1417,"Sunken Temple"],[3845,"Tempest Keep"],[3846,"The Arcatraz"],[2366,"The Black Morass"],[3713,"The Blood Furnace"],[3847,"The Botanica"],[1581,"The Deadmines"],[3849,"The Mechanar"],[4120,"The Nexus"],[4228,"The Oculus"],[3714,"The Shattered Halls"],[3717,"The Slave Pens"],[3715,"The Steamvault"],[717,"The Stockade"],[3716,"The Underbog"],[4415,"The Violet Hold"],[1337,"Uldaman"],[206,"Utgarde Keep"],[1196,"Utgarde Pinnacle"],[718,"Wailing Caverns"],[978,"Zul'Farrak"]]],[3,"Raids",,[[2677,"Blackwing Lair"],[3606,"Hyjal Summit"],[2562,"Karazhan"],[3836,"Magtheridon's Lair"],[2717,"Molten Core"],[3456,"Naxxramas"],[2159,"Onyxia's Lair"],[3429,"Ruins of Ahn'Qiraj"],[3428,"Temple of Ahn'Qiraj"],[3840,"The Black Temple"],[3842,"The Eye"],[4500,"The Eye of Eternity"],[4273,"Ulduar"],[3805,"Zul'Aman"],[19,"Zul'Gurub"]]],[4,"Classes",,[[-372,"Death Knight"],[-263,"Druid"],[-261,"Hunter"],[-161,"Mage"],[-141,"Paladin"],[-262,"Priest"],[-162,"Rogue"],[-82,"Shaman"],[-61,"Warlock"],[-81,"Warrior"]]],[5,"Professions",,[[-181,"Alchemy"],[-121,"Blacksmithing"],[-304,"Cooking"],[-201,"Engineering"],[-324,"First Aid"],[-101,"Fishing"],[-24,"Herbalism"],[-371,"Inscription"],[-373,"Jewelcrafting"],[-182,"Leatherworking"],[-264,"Tailoring"]]],[6,"Battlegrounds",,[[-25,"All"],[3358,"Arathi Basin"],[2597,"Alterac Valley"],[3820,"Eye of the Storm"],[4384,"Strand of the Ancients"],[3277,"Warsong Gulch"]]],[9,"Seasonal",,[[-370,"Brewfest"],[-1002,"Children's Week"],[-364,"Darkmoon Faire"],[-1003,"Hallow's End"],[-1005,"Harvest Festival"],[-1004,"Love is in the Air"],[-366,"Lunar Festival"],[-369,"Midsummer Fire Festival"],[-1006,"New Year's Eve"],[-374,"Noblegarden"],[-1001,"Winter Veil"]]],[7,"Miscellaneous",,[[-365,"Ahn'Qiraj War Effort"],[-241,"Argent Tournament"],[-1,"Epic"],[-344,"Legendary"],[-367,"Reputation"],[-368,"Scourge Invasion"]]],[-2,"Uncategorized"]];
+var mn_spells = [[7,"Class Skills",,[[6,"Death Knight",,[[770,"Blood"],[771,"Frost"],[772,"Unholy"],[776,"Runeforging"]]],[11,"Druid",,[[574,"Balance"],[134,"Feral Combat"],[573,"Restoration"]]],[3,"Hunter",,[[50,"Beast Mastery"],[163,"Marksmanship"],[51,"Survival"]]],[8,"Mage",,[[237,"Arcane"],[8,"Fire"],[6,"Frost"]]],[2,"Paladin",,[[594,"Holy"],[267,"Protection"],[184,"Retribution"]]],[5,"Priest",,[[613,"Discipline"],[56,"Holy"],[78,"Shadow Magic"]]],[4,"Rogue",,[[253,"Assassination"],[38,"Combat"],[633,"Lockpicking"],[39,"Subtlety"]]],[7,"Shaman",,[[375,"Elemental Combat"],[373,"Enhancement"],[374,"Restoration"]]],[9,"Warlock",,[[355,"Affliction"],[354,"Demonology"],[593,"Destruction"]]],[1,"Warrior",,[[26,"Arms"],[256,"Fury"],[257,"Protection"]]]]],[-3,"Pet Skills",,[[,"Death Knight"],[782,"Ghoul"],[,"Hunter"],[270,"Generic"],[653,"Bat"],[210,"Bear"],[655,"Bird of Prey"],[211,"Boar"],[213,"Carrion Bird"],[209,"Cat"],[780,"Chimera"],[787,"Core Hound"],[214,"Crab"],[212,"Crocolisk"],[781,"Devilsaur"],[763,"Dragonhawk"],[215,"Gorilla"],[654,"Hyena"],[775,"Moth"],[764,"Nether Ray"],[217,"Raptor"],[767,"Ravager"],[786,"Rhino"],[236,"Scorpid"],[768,"Serpent"],[783,"Silithid"],[203,"Spider"],[788,"Spirit Beast"],[765,"Sporebat"],[218,"Tallstrider"],[251,"Turtle"],[766,"Warp Stalker"],[785,"Wasp"],[656,"Wind Serpent"],[208,"Wolf"],[784,"Worm"],[,"Warlock"],[761,"Felguard"],[189,"Felhunter"],[188,"Imp"],[205,"Succubus"],[204,"Voidwalker"]]],[11,"Professions",,[[171,"Alchemy"],[164,"Blacksmithing",,[[9788,"Armorsmithing"],[9787,"Weaponsmithing"],[17041,"Master Axesmithing"],[17040,"Master Hammersmithing"],[17039,"Master Swordsmithing"]]],[333,"Enchanting"],[202,"Engineering",,[[20219,"Gnomish Engineering"],[20222,"Goblin Engineering"]]],[182,"Herbalism"],[773,"Inscription"],[755,"Jewelcrafting"],[165,"Leatherworking",,[[10656,"Dragonscale Leatherworking"],[10658,"Elemental Leatherworking"],[10660,"Tribal Leatherworking"]]],[186,"Mining"],[393,"Skinning"],[197,"Tailoring",,[[26798,"Mooncloth Tailoring"],[26801,"Shadoweave Tailoring"],[26797,"Spellfire Tailoring"]]]]],[9,"Secondary Skills",,[[185,"Cooking"],[129,"First Aid"],[356,"Fishing"],[762,"Riding"]]],[8,"Armor Proficiencies"],[10,"Languages"],[-4,"Racial Traits"],[6,"Weapon Skills"],[0,"Uncategorized"]];
+var mn_zones = [[0, "Eastern Kingdoms"], [1, "Kalimdor"], [8, "Outland"], [2, "Dungeons"], [3, "Raids"], [6, "Battlegrounds"], [9, "Arenas"]];
 var mn_talentCalc = [["0", "Druid"], ["c", "Hunter"], ["o", "Mage"], ["s", "Paladin"], ["b", "Priest"], ["f", "Rogue"], ["h", "Shaman"], ["I", "Warlock"], ["L", "Warrior"]];
 var mn_database = [[, "Browse"], [0, "Items", "?items", mn_items], [2, "Item Sets", "?itemsets"/*, mn_itemSets*/], [4, "NPCs", "?npcs", mn_npcs], [5, "Objects", "?objects", mn_objects], [3, "Quests", "?quests", mn_quests], [1, "Spells", "?spells", mn_spells], /*[6, "Zones", "?zones", mn_zones],*/ [7, "Factions", "?factions"], [, "Utilities"], /*[28, "Latest Additions", "?latest=additions"], [29, "Latest Articles", "?latest=articles"],*/ [30, "Latest Comments", "?latest=comments"]/*, [31, "Latest Screenshots", "?latest=screenshots"], [99, "Random Page", "?random"]*/];
 var mn_tools = [/*[0, "Talent Calculator", "?talent", mn_talentCalc],*/ [1, "Maps", "?maps"], [1, "Addons", "?forums&board=-1"]];
-var mn_forums = [[, "Boards"], [1, "WoW General"], [2, "WoW Help"], [ - 2, "Classes", "", [ [4, "Druid"], [5, "Hunter"], [6, "Mage"], [7, "Paladin"], [8, "Priest"], [5, "Rogue"], [9, "Shaman"], [10, "Warlock"], [11, "Warrior"]]],[13, "Dungeons&Raids"],[14, "PvP"], [15, "Professions"] , [, "Other"],[16, "Blog & News"],[17, "OffTopic"]/*, [12, "UI & Macros"], [17, "Guild Recruitment"], [2, "Randomness"], [1, "Site Feedback"], [, "Utilities"], [81, "Latest Replies", "?forums&latest-replies"], [80, "Latest Topics", "?forums&latest-topics"], [82, "Unanswered Topics", "?forums&unanswered-topics"]*/];
+var mn_forums = [[, "Boards"], [1, "WoW General"], [16, "Beginners"], [14, "PvE"], [15, "PvP"], [ - 2, "Classes", "", [[18, "Death Knight"], [3, "Druid"], [4, "Hunter"], [6, "Mage"], [7, "Paladin"], [8, "Priest"], [5, "Rogue"], [9, "Shaman"], [10, "Warlock"], [11, "Warrior"]]], [13, "Professions"], [12, "UI & Macros"], [17, "Guild Recruitment"], [2, "Randomness"], [1, "Site Feedback"], [, "Utilities"], [81, "Latest Replies", "?forums&latest-replies"], [80, "Latest Topics", "?forums&latest-topics"], [82, "Unanswered Topics", "?forums&unanswered-topics"]];
 var mn_more = [[, "All About Wowhead"], [0, "About Us & Contact", "?aboutus"], [3, "FAQ", "?faq"], [4, "IRC Channel", "?irc"], [6, "News & Announcements", "?news"], [7, "Under Development", "?underdev"], [2, "Wowhead Client", "?client"], [, "Goodies"], [1, "Contests", "?contests"], [10, "Powered by Wowhead", "?powered"], [9, "Spread Wowhead", "?spread"], [8, "Search Plugins (FF, IE7, ...)", "?searchplugins", , "Search Plugins"], [, "Even More"], [5, "Network Sites", , [[99, "Allakhazam", "http://www.allakhazam.com/", [[99, "Dark Age of Camelot", "http://camelot.allakhazam.com"], [99, "EVE Online", "http://eve.allakhazam.com"], [99, "EverQuest", "http://everquest.allakhazam.com"], [99, "EverQuest II", "http://eq2.allakhazam.com"], [99, "EverQuest Online Adventures", "http://eqoa.allakhazam.com"], [99, "Final Fantasy XI", "http://ffxi.allakhazam.com"], [99, "Lineage II", "http://l2.allakhazam.com"], [99, "Lord of the Rings Online", "http://lotr.allakhazam.com"], [99, "Star Wars Galaxies", "http://swg.allakhazam.com"], [99, "World of Warcraft", "http://wow.allakhazam.com"]]], [99, "MMO Interface", "http://www.mmointerface.com/", [[99, "EverQuest", "http://www.eqinterface.com"], [99, "EverQuest II", "http://www.eq2interface.com"], [99, "Lord of the Rings Online", "http://www.lotrointerface.com"], [99, "Vanguard: Saga of Heroes", "http://www.vginterface.com"], [99, "World of Warcraft", "http://www.wowinterface.com"]]], [99, "Online Gaming Radio", "http://www.onlinegamingradio.com/"], [99, "Thottbot", "http://www.thottbot.com/"]]]];
 var mn_path = [[0, "Database", , mn_database], [1, "Tools", , mn_tools], [3, "Forums", , mn_forums]/*, [2, "More", , mn_more]*/];
 var g_chr_classes = {
@@ -23,6 +23,8 @@ var g_chr_classes = {
 	1: "Warrior"
 };
 var g_chr_races = {
+	10: "Blood Elf",
+	11: "Draenei",
 	3: "Dwarf",
 	7: "Gnome",
 	1: "Human",
@@ -83,7 +85,9 @@ var g_item_subclasses = {
 		2: "Herb Bag",
 		3: "Enchanting Bag",
 		4: "Engineering Bag",
-		5: "Leatherworking Bag"
+		5: "Gem Bag",
+		6: "Mining Bag",
+		7: "Leatherworking Bag"
 	},
 	2: {
 		0: "One-Handed Axe",
@@ -103,6 +107,17 @@ var g_item_subclasses = {
 		18: "Crossbow",
 		19: "Wand",
 		20: "Fishing Pole"
+	},
+	3: {
+		0: "Red Gem",
+		1: "Blue Gem",
+		2: "Yellow Gem",
+		3: "Purple Gem",
+		4: "Green Gem",
+		5: "Orange Gem",
+		6: "Meta Gem",
+		7: "Simple Gem",
+		8: "Prismatic Gem"
 	},
 	4: {
 		"-6": "Cloak",
@@ -128,6 +143,7 @@ var g_item_subclasses = {
 		1: "Part",
 		2: "Explosive",
 		3: "Device",
+		4: "Jewelcrafting",
 		5: "Cloth",
 		6: "Leather",
 		7: "Metal & Stone",
@@ -148,12 +164,14 @@ var g_item_subclasses = {
 		7: "First Aid",
 		8: "Enchanting",
 		9: "Fishing",
+		10: "Jewelcrafting"
 	},
 	11: {
 		2: "Quiver",
 		3: "Ammo Pouch"
 	},
 	15: {
+		"-7": "Flying Mount",
 		"-6": "Combat Pet",
 		"-4": "Mount",
 		"-2": "Armor Token",
@@ -189,12 +207,24 @@ var g_itemset_types = {
 var g_itemset_notes = {
 	1: "Dungeon Set 1",
 	2: "Dungeon Set 2",
+	14: "Dungeon Set 3",
 	3: "Tier 1 Raid Set",
 	4: "Tier 2 Raid Set",
 	5: "Tier 3 Raid Set",
+	12: "Tier 4 Raid Set",
+	13: "Tier 5 Raid Set",
+	18: "Tier 6 Raid Set",
+	23: "Tier 7 Raid Set",
 	6: "Level 60 PvP Rare Set",
 	7: "Level 60 PvP Rare Set (Old)",
 	8: "Level 60 PvP Epic Set",
+	16: "Level 70 PvP Rare Set",
+	21: "Level 70 PvP Rare Set 2",
+	17: "Arena Season 1 Set",
+	19: "Arena Season 2 Set",
+	20: "Arena Season 3 Set",
+	22: "Arena Season 4 Set",
+	24: "Arena Season 5 Set",
 	15: "Arathi Basin Set",
 	9: "Ruins of Ahn'Qiraj Set",
 	10: "Temple of Ahn'Qiraj Set",
@@ -240,6 +270,7 @@ var g_reputation_standings = {
 };
 var g_quest_sorts = {
 	1:"Epic",
+	22:"Seasonal",
 	24:"Herbalism",
 	25:"All Battlegrounds",
 	61:"Warlock",
@@ -266,8 +297,11 @@ var g_quest_sorts = {
 	365:"Ahn'Qiraj War Effort",
 	366:"Lunar Festival",
 	367:"Reputation",
+	368:"Scourge Invasion",
 	369:"Midsummer Fire Festival",
 	370:"Brewfest",
+	371:"Inscription",
+	372:"Death Knight",
 	373:"Jewelcrafting",
 	1001:"Winter Veil",
 	1002:"Children's Week",
@@ -432,8 +466,37 @@ var g_spell_skills = {
 	733:"Troll",
 	753:"Gnome",
 	754:"Human",
+	755:"Jewelcrafting",
+	756:"Blood Elf",
 	758:"Remote Control",
+	759:"Draenei",
+	760:"Draenei",
+	761:"Felguard",
 	762:"Riding",
+	763:"Dragonhawk",
+	764:"Nether Ray",
+	765:"Sporebat",
+	766:"Warp Stalker",
+	767:"Ravager",
+	768:"Serpent",
+	769:"Internal",
+	770:"Blood",
+	771:"Frost",
+	772:"Unholy",
+	773:"Inscription",
+	775:"Moth",
+	776:"Runeforging",
+	777:"Mount",
+	778:"Companion",
+	780:"Chimera",
+	781:"Devilsaur",
+	782:"Ghoul",
+	783:"Silithid",
+	784:"Worm",
+	785:"Wasp",
+	786:"Rhino",
+	787:"Core Hound",
+	788:"Spirit Beast"
 };
 var g_zones={
 	1:"Dun Morogh",
@@ -476,6 +539,7 @@ var g_zones={
 	148:"Darkshore",
 	154:"Deathknell",
 	188:"Shadowglen",
+	206:"Utgarde Keep",
 	209:"Shadowfang Keep",
 	210:"Icecrown",
 	215:"Mulgore",
@@ -506,6 +570,7 @@ var g_zones={
 	796:"Scarlet Monastery",
 	978:"Zul'Farrak",
 	1116:"Feathermoon Stronghold",
+	1196:"Utgarde Pinnacle",
 	1216:"Timbermaw Hold",
 	1337:"Uldaman",
 	1377:"Silithus",
@@ -541,13 +606,88 @@ var g_zones={
 	3358:"Arathi Basin",
 	3428:"Temple of Ahn'Qiraj",
 	3429:"Ruins of Ahn'Qiraj",
+	3430:"Eversong Woods",
+	3431:"Sunstrider Isle",
+	3433:"Ghostlands",
+	3456:"Naxxramas",
+	3477:"Azjol-Nerub",
+	3483:"Hellfire Peninsula",
+	3487:"Silvermoon City",
+	3518:"Nagrand",
+	3519:"Terokkar Forest",
+	3520:"Shadowmoon Valley",
+	3521:"Zangarmarsh",
+	3522:"Blade's Edge Mountains",
+	3523:"Netherstorm",
+	3524:"Azuremyst Isle",
+	3525:"Bloodmyst Isle",
+	3526:"Ammen Vale",
+	3535:"Hellfire Citadel",
+	3537:"Borean Tundra",
+	3557:"The Exodar",
+	3562:"Hellfire Ramparts",
+	3606:"Hyjal Summit",
+	3607:"Serpentshrine Cavern",
+	3618:"Gruul's Lair",
+	3679:"Skettis",
+	3688:"Auchindoun",
+	3696:"The Barrier Hills",
+	3698:"Nagrand Arena",
+	3702:"Blade's Edge Arena",
+	3703:"Shattrath City",
+	3711:"Sholazar Basin",
+	3713:"The Blood Furnace",
+	3714:"The Shattered Halls",
+	3715:"The Steamvault",
+	3716:"The Underbog",
+	3717:"The Slave Pens",
+	3789:"Shadow Labyrinth",
+	3790:"Auchenai Crypts",
+	3791:"Sethekk Halls",
+	3792:"Mana-Tombs",
+	3805:"Zul'Aman",
+	3820:"Eye of the Storm",
+	3836:"Magtheridon's Lair",
+	3840:"The Black Temple",
+	3842:"The Eye",
+	3845:"Tempest Keep",
+	3846:"The Arcatraz",
+	3847:"The Botanica",
+	3849:"The Mechanar",
+	3905:"Coilfang Reservoir",
+	3959:"Black Temple",
+	3968:"Ruins of Lordaeron",
+	4024:"Coldarra",
+	4075:"Sunwell Plateau",
+	4080:"Isle of Quel'Danas",
+	4095:"Magisters' Terrace",
+	4100:"The Culling of Stratholme",
+	4120:"The Nexus",
+	4196:"Drak'Tharon Keep",
+	4197:"Wintergrasp",
+	4228:"The Oculus",
+	4264:"Halls of Stone",
+	4272:"Halls of Lightning",
+	4298:"The Scarlet Enclave",
+	4375:"Gundrak",
+	4378:"Dalaran Arena",
+	4384:"Strand of the Ancients",
+	4395:"Dalaran",
+	4406:"The Ring of Valor",
+	4415:"The Violet Hold",
+	4493:"The Obsidian Sanctum",
+	4494:"Ahn'kahet: The Old Kingdom",
+	4500:"The Eye of Eternity",
+	4603:"Vault of Archavon"
 };
 var g_zone_categories = {
 	0: "Eastern Kingdoms",
 	1: "Kalimdor",
+	8: "Outland",
 	2: "Dungeons",
 	3: "Raids",
 	6: "Battlegrounds",
+	9: "Arenas"
 };
 var g_zone_instancetypes = {
 	1: "Transit",
@@ -555,6 +695,7 @@ var g_zone_instancetypes = {
 	3: "Raid",
 	4: "Battleground",
 	5: "Dungeon",
+	6: "Arena"
 };
 var g_zone_territories = {
 	0: "Alliance",

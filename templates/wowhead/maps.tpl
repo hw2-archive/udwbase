@@ -21,12 +21,16 @@
 <option value="10">Duskwood</option>
 <option value="139">Eastern Plaguelands</option>
 <option value="12">Elwynn Forest</option>
+<option value="3430">Eversong Woods</option>
 
+<option value="3433">Ghostlands</option>
 <option value="267">Hillsbrad Foothills</option>
 <option value="1537">Ironforge</option>
+<option value="4080">Isle of Quel'Danas</option>
 <option value="38">Loch Modan</option>
 <option value="44">Redridge Mountains</option>
 <option value="51">Searing Gorge</option>
+<option value="3487">Silvermoon City</option>
 <option value="130">Silverpine Forest</option>
 
 <option value="1519">Stormwind City</option>
@@ -43,6 +47,8 @@
 <option value="0">Kalimdor</option>
 <option value="331">Ashenvale</option>
 <option value="16">Azshara</option>
+<option value="3524">Azuremyst Isle</option>
+<option value="3525">Bloodmyst Isle</option>
 <option value="148">Darkshore</option>
 <option value="1657">Darnassus</option>
 <option value="405">Desolace</option>
@@ -65,21 +71,46 @@
 <option value="1638">Thunder Bluff</option>
 <option value="490">Un'Goro Crater</option>
 <option value="618">Winterspring</option>
+</select><select onchange="mapperChooseZone(this)" class="zone-picker">
 
+<option value="0">Outland</option>
+<option value="3522">Blade's Edge Mts.</option>
+<option value="3483">Hellfire Peninsula</option>
+<option value="3518">Nagrand</option>
+<option value="3523">Netherstorm</option>
+<option value="3520">Shadowmoon Valley</option>
+<option value="3703">Shattrath City</option>
+<option value="3519">Terokkar Forest</option>
+<option value="3521">Zangarmarsh</option>
+
+</select>
 <div style="padding-bottom: 4px"></div>
 <select onchange="mapperChooseZone(this)" class="zone-picker">
 <option value="0">Instances</option>
 <optgroup label="Dungeons">
+<option value="3790">Auch.: Auchenai Crypts</option>
+<option value="3792">Auch.: Mana-Tombs</option>
+<option value="3791">Auch.: Sethekk Halls</option>
+<option value="3789">Auch.: Shadow Labyrinth</option>
 <option value="719">Blackfathom Deeps</option>
 <option value="1584">Blackrock Depths</option>
 
 <option value="1583b">Blackrock Spire (Upper)</option>
+<option value="3717">CFR: The Slave Pens</option>
+<option value="3715">CFR: The Steamvault</option>
+<option value="3716">CFR: The Underbog</option>
+<option value="2367">CoT: Old Hillsbrad Foothills</option>
+<option value="2366">CoT: The Black Morass</option>
 <option value="2557">Dire Maul</option>
 <option value="2557e">&nbsp;- East</option>
 <option value="2557n">&nbsp;- North</option>
 
 <option value="2557w">&nbsp;- West</option>
+<option value="3562">HFC: Hellfire Ramparts</option>
+<option value="3713">HFC: The Blood Furnace</option>
+<option value="3714">HFC: The Shattered Halls</option>
 <option value="133">Gnomeregan</option>
+<option value="4095">Magisters' Terrace</option>
 <option value="2100">Maraudon</option>
 <option value="2437">Ragefire Chasm</option>
 <option value="722">Razorfen Downs</option>
@@ -95,17 +126,28 @@
 <option value="1417">Sunken Temple</option>
 
 <option value="717">The Stockade</option>
+<option value="3846">TK: The Arcatraz</option>
+<option value="3847">TK: The Botanica</option>
+<option value="3849">TK: The Mechanar</option>
+<option value="1337">Uldaman</option>
 <option value="718">Wailing Caverns</option>
 <option value="978">Zul'Farrak</option>
 </optgroup>
 <optgroup label="Raids">
+<option value="3959">Black Temple</option>
 
+<option value="3607">CFR: Serpentshrine Cavern</option>
+<option value="3606">CoT: Hyjal Summit</option>
+<option value="3618">Gruul's Lair</option>
+<option value="3836">HFC: Magtheridon's Lair</option>
 <option value="2717">Molten Core</option>
 <option value="3456">Naxxramas</option>
 <option value="2159">Onyxia's Lair</option>
 <option value="3429">Ruins of Ahn'Qiraj</option>
 <option value="3428">Temple of Ahn'Qiraj</option>
 
+<option value="3842">TK: The Eye</option>
+<option value="3805">Zul'Aman</option>
 <option value="19">Zul'Gurub</option>
 </optgroup>
 </select><select onchange="mapperChooseZone(this)" class="zone-picker">
@@ -113,12 +155,16 @@
 <optgroup label="Battlegrounds">
 <option value="2597">Alterac Valley</option>
 <option value="3358">Arathi Basin</option>
+<option value="3820">Eye of the Storm</option>
+
 <option value="3277">Warsong Gulch</option>
 </optgroup>
 <optgroup label="Miscellaneous">
 <option value="-1">Azeroth</option>
 <option value="-3">Eastern Kingdoms</option>
 <option value="457">Kalimdor</option>
+<option value="-2">Outland</option>
+<option value="-4">Cosmic Map</option>
 </optgroup>
 </select>
 
